@@ -1,0 +1,3442 @@
+--
+-- Selected TOC Entries:
+--
+\connect - hugo
+--
+-- TOC Entry ID 2 (OID 824391)
+--
+-- Name: estados_id_estado_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "estados_id_estado_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 36 (OID 824410)
+--
+-- Name: estados Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "estados" (
+	"id_estado" integer DEFAULT nextval('"estados_id_estado_seq"'::text) NOT NULL,
+	"clave" character varying(5) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "estados_pkey" Primary Key ("id_estado")
+);
+
+--
+-- TOC Entry ID 4 (OID 824430)
+--
+-- Name: delegaciones__id_delegacion_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "delegaciones__id_delegacion_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 37 (OID 824449)
+--
+-- Name: delegaciones_municipios Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "delegaciones_municipios" (
+	"id_delegacion" integer DEFAULT nextval('"delegaciones__id_delegacion_seq"'::text) NOT NULL,
+	"id_estado" integer NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "delegaciones_municipios_pkey" Primary Key ("id_delegacion")
+);
+
+--
+-- TOC Entry ID 6 (OID 824469)
+--
+-- Name: planteles_id_plantel_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "planteles_id_plantel_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 38 (OID 824488)
+--
+-- Name: planteles Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "planteles" (
+	"id_plantel" integer DEFAULT nextval('"planteles_id_plantel_seq"'::text) NOT NULL,
+	"clave" character varying(5) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	"direccion" character varying(254),
+	"nombre" character varying(254),
+	"centro_trabajo" character varying(12),
+	Constraint "planteles_pkey" Primary Key ("id_plantel")
+);
+
+--
+-- TOC Entry ID 8 (OID 824511)
+--
+-- Name: semestres_id_semestre_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "semestres_id_semestre_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 39 (OID 824530)
+--
+-- Name: semestres Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "semestres" (
+	"id_semestre" integer DEFAULT nextval('"semestres_id_semestre_seq"'::text) NOT NULL,
+	"descripcion" character varying(32) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	"posicion" integer,
+	Constraint "semestres_pkey" Primary Key ("id_semestre")
+);
+
+--
+-- TOC Entry ID 40 (OID 824550)
+--
+-- Name: academias Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "academias" (
+	"clave" character(2) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "academias_pkey" Primary Key ("clave")
+);
+
+--
+-- TOC Entry ID 41 (OID 824550)
+--
+-- Name: academias Type: ACL Owner: 
+--
+
+REVOKE ALL on "academias" from PUBLIC;
+GRANT ALL on "academias" to "hugo";
+
+--
+-- TOC Entry ID 42 (OID 824568)
+--
+-- Name: areas Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "areas" (
+	"clave" character(2) NOT NULL,
+	"descripcion" character varying(254) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "areas_pkey" Primary Key ("clave")
+);
+
+--
+-- TOC Entry ID 43 (OID 824586)
+--
+-- Name: materias Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "materias" (
+	"clave" character(2) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"clave_area" character(2) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"clave_academia" character(2) NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "materias_pkey" Primary Key ("clave")
+);
+
+--
+-- TOC Entry ID 10 (OID 824606)
+--
+-- Name: modalidades_id_modalidad_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "modalidades_id_modalidad_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 44 (OID 824625)
+--
+-- Name: modalidades Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "modalidades" (
+	"id_modalidad" integer DEFAULT nextval('"modalidades_id_modalidad_seq"'::text) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"objetivos_preestablecidos" boolean NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "modalidades_pkey" Primary Key ("id_modalidad")
+);
+
+--
+-- TOC Entry ID 12 (OID 824645)
+--
+-- Name: situaciones_al_id_situacion_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "situaciones_al_id_situacion_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 45 (OID 824664)
+--
+-- Name: situaciones_alumno Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "situaciones_alumno" (
+	"id_situacion" integer DEFAULT nextval('"situaciones_al_id_situacion_seq"'::text) NOT NULL,
+	"descripcion" character varying(32) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "situaciones_alumno_pkey" Primary Key ("id_situacion")
+);
+
+--
+-- TOC Entry ID 46 (OID 824683)
+--
+-- Name: alumnos Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "alumnos" (
+	"matricula" character(10) NOT NULL,
+	"apellidos" character varying(64) NOT NULL,
+	"nombres" character varying(64) NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"id_situacion" integer NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	"fecha_ingreso" date,
+	"curp" character varying(18),
+	Constraint "alumnos_pkey" Primary Key ("matricula")
+);
+
+--
+-- TOC Entry ID 47 (OID 824706)
+--
+-- Name: alumnos_x_grupo Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "alumnos_x_grupo" (
+	"matricula" character(10) NOT NULL,
+	"id_grupo" integer NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	"asistencia" bigint,
+	Constraint "alumnos_x_grupo_pkey" Primary Key ("matricula", "id_grupo", "id_plantel")
+);
+
+--
+-- TOC Entry ID 14 (OID 824725)
+--
+-- Name: objetivos_id_objetivo_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "objetivos_id_objetivo_seq" start 616 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 48 (OID 824744)
+--
+-- Name: objetivos Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "objetivos" (
+	"id_objetivo" integer DEFAULT nextval('"objetivos_id_objetivo_seq"'::text) NOT NULL,
+	"descripcion" character varying(600) NOT NULL,
+	"es_esencial" boolean NOT NULL,
+	"plan" character(5) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"clave_materia" character(2) NOT NULL,
+	"id_usuario_cambio" integer,
+	Constraint "objetivos_pkey" Primary Key ("id_objetivo")
+);
+
+--
+-- TOC Entry ID 16 (OID 824766)
+--
+-- Name: periodos_eval_id_periodo_ev_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "periodos_eval_id_periodo_ev_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 49 (OID 824785)
+--
+-- Name: periodos_evaluacion Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "periodos_evaluacion" (
+	"id_periodo_evaluacion" integer DEFAULT nextval('"periodos_eval_id_periodo_ev_seq"'::text) NOT NULL,
+	"clave" character varying(5) NOT NULL,
+	"descripcion" character varying(254) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "periodos_evaluacion_pkey" Primary Key ("id_periodo_evaluacion")
+);
+
+--
+-- TOC Entry ID 18 (OID 824805)
+--
+-- Name: recomendacion_id_recomendac_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "recomendacion_id_recomendac_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 50 (OID 824824)
+--
+-- Name: recomendaciones Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "recomendaciones" (
+	"id_recomendacion" integer DEFAULT nextval('"recomendacion_id_recomendac_seq"'::text) NOT NULL,
+	"clave" character(2) NOT NULL,
+	"descripcion" character varying(254) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "recomendaciones_pkey" Primary Key ("id_recomendacion")
+);
+
+--
+-- TOC Entry ID 51 (OID 824844)
+--
+-- Name: recomendaciones_x_periodo Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "recomendaciones_x_periodo" (
+	"id_periodo_evaluacion" integer NOT NULL,
+	"id_recomendacion" integer NOT NULL,
+	Constraint "recomendaciones_x_periodo_pkey" Primary Key ("id_periodo_evaluacion", "id_recomendacion")
+);
+
+--
+-- TOC Entry ID 20 (OID 824858)
+--
+-- Name: aulas_id_aula_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "aulas_id_aula_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 52 (OID 824877)
+--
+-- Name: aulas Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "aulas" (
+	"id_aula" integer DEFAULT nextval('"aulas_id_aula_seq"'::text) NOT NULL,
+	"descripcion" character varying(16) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "aulas_pkey" Primary Key ("id_aula")
+);
+
+--
+-- TOC Entry ID 53 (OID 824896)
+--
+-- Name: dias Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "dias" (
+	"clave" character(1) NOT NULL,
+	"descripcion" character varying(16),
+	Constraint "dias_pkey" Primary Key ("clave")
+);
+
+--
+-- TOC Entry ID 22 (OID 824910)
+--
+-- Name: grupos_horarios_id_grupo_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "grupos_horarios_id_grupo_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 54 (OID 824929)
+--
+-- Name: objetivos_x_asignatura Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "objetivos_x_asignatura" (
+	"id_objetivo" integer NOT NULL,
+	"id_asignatura" integer NOT NULL,
+	"consecutivo" smallint NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "objetivos_x_asignatura_pkey" Primary Key ("id_objetivo", "id_asignatura")
+);
+
+--
+-- TOC Entry ID 55 (OID 824948)
+--
+-- Name: caracterizaciones Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "caracterizaciones" (
+	"id_objetivo" integer NOT NULL,
+	"descripcion" character varying(1200) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "caracterizaciones_pkey" Primary Key ("id_objetivo")
+);
+
+--
+-- TOC Entry ID 24 (OID 824966)
+--
+-- Name: estados_civil_id_estado_civ_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "estados_civil_id_estado_civ_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 56 (OID 824985)
+--
+-- Name: estados_civiles Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "estados_civiles" (
+	"id_estado_civil" integer DEFAULT nextval('"estados_civil_id_estado_civ_seq"'::text) NOT NULL,
+	"descripcion" character varying(32) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "estados_civiles_pkey" Primary Key ("id_estado_civil")
+);
+
+--
+-- TOC Entry ID 57 (OID 825004)
+--
+-- Name: alumnos_generales Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "alumnos_generales" (
+	"matricula" character(10) NOT NULL,
+	"calle" character varying(90) NOT NULL,
+	"no_interior" character varying(32),
+	"no_exterior" character varying(32) NOT NULL,
+	"colonia" character varying(90) NOT NULL,
+	"id_delegacion" integer NOT NULL,
+	"codigo_postal" character(5) NOT NULL,
+	"telefono" character varying(15),
+	"telefono_alterno" character varying(15),
+	"es_hombre" boolean NOT NULL,
+	"fecha_nacimiento" date,
+	"id_estado_civil" integer,
+	"no_hijos" smallint,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "alumnos_generales_pkey" Primary Key ("matricula")
+);
+
+--
+-- TOC Entry ID 58 (OID 825033)
+--
+-- Name: alumnos_situacion_log Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "alumnos_situacion_log" (
+	"matricula" character(10) NOT NULL,
+	"id_situacion" integer NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	"descripcion" character varying(1000),
+	"hora_alta" time,
+	"fecha_movimiento" date
+);
+
+--
+-- TOC Entry ID 59 (OID 825050)
+--
+-- Name: pga_queries Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "pga_queries" (
+	"queryname" character varying(64),
+	"querytype" character(1),
+	"querycommand" text,
+	"querytables" text,
+	"querylinks" text,
+	"queryresults" text,
+	"querycomments" text
+);
+
+--
+-- TOC Entry ID 60 (OID 825050)
+--
+-- Name: pga_queries Type: ACL Owner: 
+--
+
+REVOKE ALL on "pga_queries" from PUBLIC;
+GRANT ALL on "pga_queries" to PUBLIC;
+GRANT ALL on "pga_queries" to "hugo";
+
+--
+-- TOC Entry ID 61 (OID 825081)
+--
+-- Name: pga_forms Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "pga_forms" (
+	"formname" character varying(64),
+	"formsource" text
+);
+
+--
+-- TOC Entry ID 62 (OID 825081)
+--
+-- Name: pga_forms Type: ACL Owner: 
+--
+
+REVOKE ALL on "pga_forms" from PUBLIC;
+GRANT ALL on "pga_forms" to PUBLIC;
+GRANT ALL on "pga_forms" to "hugo";
+
+--
+-- TOC Entry ID 63 (OID 825107)
+--
+-- Name: pga_scripts Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "pga_scripts" (
+	"scriptname" character varying(64),
+	"scriptsource" text
+);
+
+--
+-- TOC Entry ID 64 (OID 825107)
+--
+-- Name: pga_scripts Type: ACL Owner: 
+--
+
+REVOKE ALL on "pga_scripts" from PUBLIC;
+GRANT ALL on "pga_scripts" to PUBLIC;
+GRANT ALL on "pga_scripts" to "hugo";
+
+--
+-- TOC Entry ID 65 (OID 825133)
+--
+-- Name: pga_reports Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "pga_reports" (
+	"reportname" character varying(64),
+	"reportsource" text,
+	"reportbody" text,
+	"reportprocs" text,
+	"reportoptions" text
+);
+
+--
+-- TOC Entry ID 66 (OID 825133)
+--
+-- Name: pga_reports Type: ACL Owner: 
+--
+
+REVOKE ALL on "pga_reports" from PUBLIC;
+GRANT ALL on "pga_reports" to PUBLIC;
+GRANT ALL on "pga_reports" to "hugo";
+
+--
+-- TOC Entry ID 67 (OID 825162)
+--
+-- Name: pga_schema Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "pga_schema" (
+	"schemaname" character varying(64),
+	"schematables" text,
+	"schemalinks" text
+);
+
+--
+-- TOC Entry ID 68 (OID 825162)
+--
+-- Name: pga_schema Type: ACL Owner: 
+--
+
+REVOKE ALL on "pga_schema" from PUBLIC;
+GRANT ALL on "pga_schema" to PUBLIC;
+GRANT ALL on "pga_schema" to "hugo";
+
+--
+-- TOC Entry ID 69 (OID 825189)
+--
+-- Name: pga_layout Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "pga_layout" (
+	"tablename" character varying(64),
+	"nrcols" smallint,
+	"colnames" text,
+	"colwidth" text
+);
+
+--
+-- TOC Entry ID 70 (OID 825189)
+--
+-- Name: pga_layout Type: ACL Owner: 
+--
+
+REVOKE ALL on "pga_layout" from PUBLIC;
+GRANT ALL on "pga_layout" to PUBLIC;
+GRANT ALL on "pga_layout" to "hugo";
+
+--
+-- TOC Entry ID 71 (OID 825217)
+--
+-- Name: grupos_horarios Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "grupos_horarios" (
+	"id_grupo" integer NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"clave_dia" character(1) NOT NULL,
+	"hora_inicial" time NOT NULL,
+	"id_aula" integer,
+	"hora_final" time,
+	"es_laboratorio" boolean,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "grupos_horarios_pkey" Primary Key ("id_grupo", "id_plantel", "clave_dia", "hora_inicial")
+);
+
+--
+-- TOC Entry ID 26 (OID 825240)
+--
+-- Name: asignaturas_id_asignatura_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "asignaturas_id_asignatura_seq" start 608 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 72 (OID 825259)
+--
+-- Name: asignaturas Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "asignaturas" (
+	"id_asignatura" integer DEFAULT nextval('"asignaturas_id_asignatura_seq"'::text) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"clave" character(6),
+	"id_asignatura_antecede" integer NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"clave_materia" character(2) NOT NULL,
+	"id_usuario_cambio" integer,
+	"semestre" integer NOT NULL,
+	Constraint "asignaturas_pkey" Primary Key ("id_asignatura")
+);
+
+--
+-- TOC Entry ID 28 (OID 825311)
+--
+-- Name: usuarios_usuario_id_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "usuarios_usuario_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 73 (OID 825330)
+--
+-- Name: usuarios Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "usuarios" (
+	"usuario_id" integer DEFAULT nextval('"usuarios_usuario_id_seq"'::text) NOT NULL,
+	"usuario" character varying(32) NOT NULL,
+	"contrasena" character varying(20) NOT NULL,
+	"nivel" smallint NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	"crear_usuario" boolean,
+	"link_id" integer,
+	"tabla" character varying(64),
+	Constraint "usuarios_pkey" Primary Key ("usuario_id")
+);
+
+--
+-- TOC Entry ID 30 (OID 825354)
+--
+-- Name: grupos_id_grupo_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "grupos_id_grupo_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 74 (OID 825373)
+--
+-- Name: grupos Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "grupos" (
+	"id_grupo" integer DEFAULT nextval('"grupos_id_grupo_seq"'::text) NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"clave" character(4) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"id_modalidad" integer NOT NULL,
+	"id_profesor" integer NOT NULL,
+	"id_asignatura" integer NOT NULL,
+	"id_semestre" integer NOT NULL,
+	"no_clases" smallint,
+	"no_tutorias" integer,
+	"no_laboratorios" integer,
+	"no_seminarios" integer,
+	"no_practicas" integer,
+	"no_trabajos" integer,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"clave_materia" character(2) NOT NULL,
+	"id_usuario_cambio" integer,
+	Constraint "grupos_pkey" Primary Key ("id_grupo", "id_plantel")
+);
+
+--
+-- TOC Entry ID 75 (OID 825405)
+--
+-- Name: consecutivos Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "consecutivos" (
+	"matricula" integer NOT NULL,
+	"db_version" character varying(12),
+	"folio" integer,
+	"folio_cambio_plantel" integer
+);
+
+--
+-- TOC Entry ID 32 (OID 825416)
+--
+-- Name: profesores_id_profesor_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "profesores_id_profesor_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 76 (OID 825435)
+--
+-- Name: profesores Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "profesores" (
+	"id_profesor" integer DEFAULT nextval('"profesores_id_profesor_seq"'::text) NOT NULL,
+	"rfc" character(13) NOT NULL,
+	"apellidos" character varying(64) NOT NULL,
+	"nombres" character varying(64) NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"calle" character varying(90),
+	"no_interior" character varying(32),
+	"no_exterior" character varying(32),
+	"colonia" character varying(90),
+	"id_delegacion" integer NOT NULL,
+	"codigo_postal" character(5),
+	"telefono" character varying(15),
+	"telefono_alterno" character varying(15),
+	"es_hombre" boolean,
+	"fecha_nacimiento" date,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	"curp" character varying(18),
+	Constraint "profesores_pkey" Primary Key ("id_profesor")
+);
+
+--
+-- TOC Entry ID 77 (OID 825468)
+--
+-- Name: resultados Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "resultados" (
+	"clave" character(2) NOT NULL,
+	"descripcion" character varying(64) NOT NULL,
+	"posicion" integer NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "resultados_pkey" Primary Key ("clave")
+);
+
+--
+-- TOC Entry ID 78 (OID 825487)
+--
+-- Name: evaluaciones_x_objetivo Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "evaluaciones_x_objetivo" (
+	"matricula" character(10) NOT NULL,
+	"id_objetivo" integer NOT NULL,
+	"clave_resultado" character(2) NOT NULL,
+	"recomendacion" character varying(1000),
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "evaluaciones_x_objetivo_pkey" Primary Key ("matricula", "id_objetivo")
+);
+
+--
+-- TOC Entry ID 79 (OID 825507)
+--
+-- Name: evaluaciones_historico Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "evaluaciones_historico" (
+	"matricula" character(10) NOT NULL,
+	"id_objetivo" integer NOT NULL,
+	"id_semestre" integer NOT NULL,
+	"id_grupo" integer,
+	"id_plantel" integer,
+	"id_periodo_evaluacion" integer,
+	"clave_resultado" character(2) NOT NULL,
+	"recomendacion" character varying(1000),
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "evaluaciones_historico_pkey" Primary Key ("matricula", "id_objetivo", "id_semestre")
+);
+
+--
+-- TOC Entry ID 80 (OID 825531)
+--
+-- Name: evaluaciones Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "evaluaciones" (
+	"matricula" character(10) NOT NULL,
+	"id_grupo" integer NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"id_periodo_evaluacion" integer,
+	"id_semestre" integer NOT NULL,
+	"id_recomendacion" integer NOT NULL,
+	"no_clases" integer,
+	"no_tutorias" integer,
+	"no_laboratorios" integer,
+	"no_seminarios" integer,
+	"no_practicas" integer,
+	"no_trabajos" integer,
+	"observaciones" character varying(1000),
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "evaluaciones_pkey" Primary Key ("matricula", "id_grupo", "id_plantel")
+);
+
+--
+-- TOC Entry ID 81 (OID 825560)
+--
+-- Name: accesos_usuario Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "accesos_usuario" (
+	"clave_modulo" character(2) NOT NULL,
+	"usuario_id" integer NOT NULL,
+	"acceso" bigint NOT NULL,
+	Constraint "accesos_pkey" Primary Key ("clave_modulo", "usuario_id")
+);
+
+--
+-- TOC Entry ID 82 (OID 965243)
+--
+-- Name: aspirantes Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "aspirantes" (
+	"folio" character(7) NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"apellidos" character varying(64) NOT NULL,
+	"nombres" character varying(64) NOT NULL,
+	"calle" character varying(90) NOT NULL,
+	"no_exterior" character varying(32) NOT NULL,
+	"no_interior" character varying(32),
+	"colonia" character varying(90) NOT NULL,
+	"id_delegacion" integer NOT NULL,
+	"codigo_postal" character(5) NOT NULL,
+	"telefono" character varying(15),
+	"telefono_alterno" character varying(15),
+	"es_hombre" boolean NOT NULL,
+	"fecha_nacimiento" date NOT NULL,
+	"anio_egreso_secundaria" integer NOT NULL,
+	"promedio_secundaria" double precision,
+	"entrego_acta" boolean NOT NULL,
+	"entrego_certificado" boolean NOT NULL,
+	"entrego_comprobante" boolean NOT NULL,
+	"no_sorteo" integer,
+	"turno" character(1),
+	"matricula" character(13),
+	"ya_inscrito" boolean NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_cambio" integer,
+	"fecha_cambio" date,
+	Constraint "aspirantes_pkey" Primary Key ("folio")
+);
+
+--
+-- TOC Entry ID 83 (OID 965294)
+--
+-- Name: colonias Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "colonias" (
+	"colonia" character varying(90) NOT NULL,
+	"id_delegacion" integer NOT NULL,
+	"codigo_postal" character(5),
+	"id_plantel" integer NOT NULL,
+	"distancia_plantel" integer,
+	"poblacion" integer,
+	"grado_marginacion" integer,
+	Constraint "colonias_pkey" Primary Key ("colonia", "id_delegacion")
+);
+
+--
+-- TOC Entry ID 84 (OID 966023)
+--
+-- Name: evaluaciones_back Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "evaluaciones_back" (
+	"matricula" character(10),
+	"id_grupo" integer,
+	"id_plantel" integer,
+	"id_periodo_evaluacion" integer,
+	"id_semestre" integer,
+	"id_recomendacion" integer,
+	"no_clases" integer,
+	"no_tutorias" integer,
+	"no_laboratorios" integer,
+	"no_seminarios" integer,
+	"no_practicas" integer,
+	"no_trabajos" integer,
+	"observaciones" character varying(1000),
+	"fecha_alta" date,
+	"id_usuario_alta" integer,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer
+);
+
+--
+-- TOC Entry ID 85 (OID 1007733)
+--
+-- Name: registro_cambio_plantel Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "registro_cambio_plantel" (
+	"matricula" character(10) NOT NULL,
+	"clave_plantel_origen" character varying(5) NOT NULL,
+	"clave_plantel_destino" character varying(5) NOT NULL,
+	"folio_oficio" character varying(15),
+	"folio_cambio_plantel" character varying(9) NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL
+);
+
+--
+-- TOC Entry ID 34 (OID 1016573)
+--
+-- Name: asistencias_id_asistencia_seq Type: SEQUENCE Owner: hugo
+--
+
+CREATE SEQUENCE "asistencias_id_asistencia_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 86 (OID 1016592)
+--
+-- Name: asistencias Type: TABLE Owner: hugo
+--
+
+CREATE TABLE "asistencias" (
+	"id_asistencia" integer DEFAULT nextval('"asistencias_id_asistencia_seq"'::text) NOT NULL,
+	"id_grupo" integer NOT NULL,
+	"id_plantel" integer NOT NULL,
+	"fecha_asistencia" date NOT NULL,
+	"fecha_alta" date NOT NULL,
+	"id_usuario_alta" integer NOT NULL,
+	"fecha_cambio" date,
+	"id_usuario_cambio" integer,
+	Constraint "asistencias_pkey" Primary Key ("id_asistencia")
+);
+
+--
+-- TOC Entry ID 139 (OID 1016623)
+--
+-- Name: "_aspirantes_x_sexo_x_colonia" (boolean,character varying) Type: FUNCTION Owner: hugo
+--
+
+CREATE FUNCTION "_aspirantes_x_sexo_x_colonia" (boolean,character varying) RETURNS integer AS 'select int4(count(*)) from aspirantes where es_hombre = $1 and colonia= $2;' LANGUAGE 'sql';
+
+--
+-- TOC Entry ID 140 (OID 1016624)
+--
+-- Name: "_aspirantes_x_sexo_x_delegacion" (boolean,integer) Type: FUNCTION Owner: hugo
+--
+
+CREATE FUNCTION "_aspirantes_x_sexo_x_delegacion" (boolean,integer) RETURNS integer AS 'select int4(count(*)) from aspirantes where es_hombre = $1 and id_delegacion = $2;' LANGUAGE 'sql';
+
+--
+-- TOC Entry ID 141 (OID 1016625)
+--
+-- Name: "_aspirantes_x_sexo_x_usuario" (boolean,integer) Type: FUNCTION Owner: hugo
+--
+
+CREATE FUNCTION "_aspirantes_x_sexo_x_usuario" (boolean,integer) RETURNS integer AS 'select int4(count(*)) from aspirantes where es_hombre = $1 and id_usuario_alta = $2;' LANGUAGE 'sql';
+
+--
+-- TOC Entry ID 87 (OID 1016648)
+--
+-- Name: vw_grupos_x_asignatura Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_grupos_x_asignatura" as SELECT g.id_grupo, g.id_plantel, g.clave, g.descripcion, g.id_modalidad, g.id_profesor, g.id_semestre, a.id_asignatura, a.clave AS clave_asignatura, a.descripcion AS asignatura, a.clave_materia, a.id_asignatura_antecede, a.semestre FROM grupos g, asignaturas a WHERE (g.id_asignatura = a.id_asignatura);
+
+--
+-- TOC Entry ID 88 (OID 1016696)
+--
+-- Name: vw_grupos_horarios Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_grupos_horarios" as SELECT g.id_grupo, g.id_plantel, d.descripcion AS dia, g.hora_inicial, g.hora_final, a.descripcion AS aula, g.es_laboratorio FROM grupos_horarios g, dias d, aulas a WHERE ((g.clave_dia = d.clave) AND (g.id_aula = a.id_aula)) ORDER BY g.id_grupo, d.clave, g.hora_inicial;
+
+--
+-- TOC Entry ID 89 (OID 1016709)
+--
+-- Name: vw_grupos_no_alumnos Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_grupos_no_alumnos" as SELECT g.id_grupo, g.id_plantel, int4(count(x.matricula)) AS no_alumnos FROM grupos g, alumnos_x_grupo x WHERE ((g.id_plantel = x.id_plantel) AND (g.id_grupo = x.id_grupo)) GROUP BY g.id_grupo, g.id_plantel;
+
+--
+-- TOC Entry ID 90 (OID 1016764)
+--
+-- Name: vw_objetivos_x_asignatura Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_objetivos_x_asignatura" as SELECT o.id_objetivo, o.descripcion AS objetivo, o.es_esencial, o.plan, o.clave_materia AS clave_materia_objetivo, c.descripcion AS caracterizacion, x.consecutivo, a.id_asignatura, a.clave AS clave_asignatura, a.descripcion AS asignatura, m.clave AS clave_materia_asignatura, m.descripcion AS materia_asignatura FROM ((((objetivos o LEFT JOIN objetivos_x_asignatura x ON ((o.id_objetivo = x.id_objetivo))) LEFT JOIN asignaturas a ON ((x.id_asignatura = a.id_asignatura))) LEFT JOIN materias m ON ((a.clave_materia = m.clave))) LEFT JOIN caracterizaciones c ON ((o.id_objetivo = c.id_objetivo)));
+
+--
+-- TOC Entry ID 91 (OID 1016802)
+--
+-- Name: vw_alumnos_x_grupo Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_alumnos_x_grupo" as SELECT g.id_grupo, g.id_plantel, g.clave, g.descripcion, g.id_modalidad, g.id_profesor, g.clave_materia, g.id_asignatura, g.id_semestre, g.no_clases, g.no_tutorias, g.no_laboratorios, g.no_seminarios, g.no_practicas, g.no_trabajos, a.matricula, a.apellidos, a.nombres, a.id_plantel AS id_plantel_alumno, a.id_situacion, x.asistencia, x.fecha_alta, x.id_usuario_alta, x.fecha_cambio, x.id_usuario_cambio FROM grupos g, alumnos a, alumnos_x_grupo x WHERE (((g.id_grupo = x.id_grupo) AND (g.id_plantel = x.id_plantel)) AND (a.matricula = x.matricula));
+
+--
+-- TOC Entry ID 92 (OID 1016825)
+--
+-- Name: vw_evaluacion_x_posicion Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_evaluacion_x_posicion" as SELECT e.matricula, e.id_objetivo, e.id_semestre, e.id_grupo, e.id_plantel, e.id_periodo_evaluacion, e.clave_resultado, e.recomendacion, r.descripcion AS resultado, r.posicion FROM evaluaciones_historico e, resultados r WHERE (e.clave_resultado = r.clave);
+
+--
+-- TOC Entry ID 93 (OID 1016844)
+--
+-- Name: vw_evaluaciones_semestre Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_evaluaciones_semestre" as SELECT e.matricula, e.id_objetivo, e.id_semestre, e.id_grupo, e.id_plantel, e.id_periodo_evaluacion, e.clave_resultado, e.recomendacion, s.descripcion AS semestre FROM evaluaciones_historico e, semestres s WHERE (e.id_semestre = s.id_semestre);
+
+--
+-- TOC Entry ID 94 (OID 1016871)
+--
+-- Name: vw_grupos_horarios_aulas Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_grupos_horarios_aulas" as SELECT h.id_grupo, h.id_plantel, h.clave_dia, h.hora_inicial, h.id_aula, h.hora_final, a.descripcion, g.clave, g.descripcion AS grupo, g.id_modalidad, g.id_profesor, g.clave_materia, g.id_asignatura, g.id_semestre, p.rfc, p.apellidos, p.nombres FROM grupos_horarios h, aulas a, grupos g, profesores p WHERE ((((h.id_grupo = g.id_grupo) AND (h.id_plantel = g.id_plantel)) AND (h.id_aula = a.id_aula)) AND (g.id_profesor = p.id_profesor));
+
+--
+-- TOC Entry ID 95 (OID 1016897)
+--
+-- Name: vw_evaluaciones_historico Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_evaluaciones_historico" as SELECT e.matricula, e.id_objetivo, e.id_semestre, e.id_grupo, e.id_plantel, e.id_periodo_evaluacion, e.clave_resultado, e.recomendacion, e.semestre, o.id_asignatura, o.asignatura, o.consecutivo, o.clave_asignatura FROM vw_evaluaciones_semestre e, vw_objetivos_x_asignatura o WHERE (e.id_objetivo = o.id_objetivo);
+
+--
+-- TOC Entry ID 96 (OID 1016909)
+--
+-- Name: vw_no_objetivos_x_asignatura Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_no_objetivos_x_asignatura" as SELECT int8(count(*)) AS no_objetivos, objetivos_x_asignatura.id_asignatura FROM objetivos_x_asignatura GROUP BY objetivos_x_asignatura.id_asignatura;
+
+--
+-- TOC Entry ID 97 (OID 1016945)
+--
+-- Name: vw_alumnos_x_grupo_semestre Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_alumnos_x_grupo_semestre" as SELECT x.id_grupo, x.id_plantel, x.clave, x.descripcion, x.id_modalidad, x.id_profesor, x.clave_materia, x.id_asignatura, x.id_semestre, x.no_clases, x.no_tutorias, x.no_laboratorios, x.no_seminarios, x.no_practicas, x.no_trabajos, x.matricula, x.apellidos, x.nombres, x.id_plantel_alumno, x.id_situacion, x.asistencia, x.fecha_alta, x.id_usuario_alta, x.fecha_cambio, x.id_usuario_cambio, s.descripcion AS semestre FROM vw_alumnos_x_grupo x, semestres s WHERE (x.id_semestre = s.id_semestre);
+
+--
+-- TOC Entry ID 98 (OID 1016962)
+--
+-- Name: vw_aspirantes_x_colonia Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_aspirantes_x_colonia" as SELECT aspirantes.colonia, "_aspirantes_x_sexo_x_colonia"('t'::bool, aspirantes.colonia) AS hombre, "_aspirantes_x_sexo_x_colonia"('f'::bool, aspirantes.colonia) AS mujer, int4(count(*)) AS total FROM aspirantes GROUP BY aspirantes.colonia;
+
+--
+-- TOC Entry ID 99 (OID 1016976)
+--
+-- Name: vw_aspirantes_x_delegacion Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_aspirantes_x_delegacion" as SELECT aspirantes.id_delegacion, "_aspirantes_x_sexo_x_delegacion"('t'::bool, aspirantes.id_delegacion) AS hombre, "_aspirantes_x_sexo_x_delegacion"('f'::bool, aspirantes.id_delegacion) AS mujer, int4(count(*)) AS total FROM aspirantes GROUP BY aspirantes.id_delegacion;
+
+--
+-- TOC Entry ID 100 (OID 1016990)
+--
+-- Name: vw_aspirantes_x_usuario Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_aspirantes_x_usuario" as SELECT aspirantes.id_usuario_alta, "_aspirantes_x_sexo_x_usuario"('t'::bool, aspirantes.id_usuario_alta) AS hombre, "_aspirantes_x_sexo_x_usuario"('f'::bool, aspirantes.id_usuario_alta) AS mujer, int4(count(*)) AS total FROM aspirantes GROUP BY aspirantes.id_usuario_alta;
+
+--
+-- TOC Entry ID 101 (OID 1017010)
+--
+-- Name: vw_grupos_horarios_alumnos Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_grupos_horarios_alumnos" as SELECT h.id_grupo, h.id_plantel, h.dia, h.hora_inicial, h.hora_final, h.aula, h.es_laboratorio, x.matricula, x.id_semestre, x.id_profesor FROM vw_grupos_horarios h, vw_alumnos_x_grupo x WHERE (x.id_grupo = h.id_grupo);
+
+--
+-- TOC Entry ID 102 (OID 1017025)
+--
+-- Name: vw_resultados_x_profesor Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_resultados_x_profesor" as SELECT g.id_profesor, e.clave_resultado, r.posicion, e.id_semestre, int4(count(*)) AS count FROM evaluaciones_historico e, resultados r, grupos g WHERE ((r.clave = e.clave_resultado) AND (e.id_grupo = g.id_grupo)) GROUP BY g.id_profesor, e.clave_resultado, r.posicion, e.id_semestre ORDER BY g.id_profesor, r.posicion;
+
+--
+-- TOC Entry ID 103 (OID 1017038)
+--
+-- Name: vw_inscritos_x_profesor Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_inscritos_x_profesor" as SELECT g.id_profesor, g.id_semestre, int4(count(*)) AS count FROM grupos g, alumnos_x_grupo x WHERE (g.id_grupo = x.id_grupo) GROUP BY g.id_profesor, g.id_semestre;
+
+--
+-- TOC Entry ID 104 (OID 1017053)
+--
+-- Name: vw_resultados_x_materia Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_resultados_x_materia" as SELECT m.clave, e.clave_resultado, r.posicion, e.id_semestre, int4(count(*)) AS count FROM vw_evaluaciones_historico e, resultados r, asignaturas a, materias m WHERE (((r.clave = e.clave_resultado) AND (e.id_asignatura = a.id_asignatura)) AND (a.clave_materia = m.clave)) GROUP BY m.clave, e.clave_resultado, r.posicion, e.id_semestre ORDER BY m.clave, r.posicion;
+
+--
+-- TOC Entry ID 105 (OID 1017066)
+--
+-- Name: vw_inscritos_x_materia Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_inscritos_x_materia" as SELECT g.clave_materia, g.id_semestre, int4(count(*)) AS count FROM grupos g, alumnos_x_grupo x WHERE (g.id_grupo = x.id_grupo) GROUP BY g.clave_materia, g.id_semestre;
+
+--
+-- TOC Entry ID 106 (OID 1017081)
+--
+-- Name: vw_resultados_x_asignatura Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_resultados_x_asignatura" as SELECT e.id_asignatura, e.clave_resultado, r.posicion, e.id_semestre, int4(count(*)) AS count FROM vw_evaluaciones_historico e, resultados r WHERE (r.clave = e.clave_resultado) GROUP BY e.id_asignatura, e.clave_resultado, r.posicion, e.id_semestre ORDER BY e.id_asignatura, r.posicion;
+
+--
+-- TOC Entry ID 107 (OID 1017094)
+--
+-- Name: vw_inscritos_x_asignatura Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_inscritos_x_asignatura" as SELECT g.id_asignatura, g.id_semestre, int4(count(*)) AS count FROM grupos g, alumnos_x_grupo x WHERE (g.id_grupo = x.id_grupo) GROUP BY g.id_asignatura, g.id_semestre;
+
+--
+-- TOC Entry ID 108 (OID 1017110)
+--
+-- Name: vw_no_cubiertos_x_asignatura Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_no_cubiertos_x_asignatura" as SELECT so.id_asignatura, so.inscritos, so.consecutivo, se.cubiertos, float8(((se.cubiertos * 100) / so.inscritos)) AS pct, (so.inscritos - se.cubiertos) AS nc FROM ((SELECT si.id_asignatura, si.inscritos, x.id_objetivo, x.consecutivo FROM ((SELECT sx.id_asignatura, int4(count(*)) AS inscritos FROM (SELECT DISTINCT x.matricula, sg.id_asignatura FROM (alumnos_x_grupo x JOIN (SELECT grupos.id_grupo, a.id_asignatura FROM (grupos LEFT JOIN asignaturas a ON ((grupos.id_asignatura = a.id_asignatura)))) sg ON ((sg.id_grupo = x.id_grupo))) ORDER BY x.matricula, sg.id_asignatura) sx GROUP BY sx.id_asignatura) si JOIN objetivos_x_asignatura x ON ((x.id_asignatura = si.id_asignatura)))) so LEFT JOIN (SELECT e.id_objetivo, int4(count(*)) AS cubiertos FROM (SELECT DISTINCT evaluaciones_historico.matricula, evaluaciones_historico.id_objetivo FROM evaluaciones_historico WHERE (evaluaciones_historico.clave_resultado = 'C'::bpchar) ORDER BY evaluaciones_historico.matricula, evaluaciones_historico.id_objetivo) e GROUP BY e.id_objetivo) se ON ((se.id_objetivo = so.id_objetivo))) ORDER BY so.id_asignatura, so.consecutivo;
+
+--
+-- TOC Entry ID 109 (OID 1017132)
+--
+-- Name: vw_evaluaciones Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_evaluaciones" as SELECT e.matricula, e.id_grupo, e.id_plantel, e.id_semestre, e.id_recomendacion, e.observaciones, r.clave AS clave_recomendacion, r.descripcion AS recomendacion FROM evaluaciones e, recomendaciones r WHERE (e.id_recomendacion = r.id_recomendacion);
+
+--
+-- TOC Entry ID 110 (OID 1017159)
+--
+-- Name: vw_recomendaciones Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_recomendaciones" as SELECT g.id_grupo, g.id_plantel, g.clave, g.descripcion, g.id_modalidad, g.id_profesor, g.clave_materia, g.id_asignatura, g.id_semestre, g.matricula, g.apellidos, g.nombres, g.id_plantel_alumno, g.id_situacion, e.id_recomendacion, e.clave_recomendacion, e.recomendacion FROM vw_alumnos_x_grupo g, vw_evaluaciones e WHERE (((g.matricula = e.matricula) AND (g.id_grupo = e.id_grupo)) AND (g.id_plantel = e.id_plantel));
+
+--
+-- TOC Entry ID 111 (OID 1020053)
+--
+-- Name: vw_grupos Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_grupos" as SELECT g.id_grupo, g.id_plantel, l.descripcion AS plantel, g.clave AS grupo, g.descripcion, m.descripcion AS modalidad, p.apellidos AS profesor_apellidos, p.nombres AS profesor_nombres, g.id_profesor, g.clave_materia, a.id_asignatura, a.descripcion AS asignatura, s.id_semestre, s.descripcion AS semestre, g.no_clases, g.no_tutorias, g.no_laboratorios, g.no_seminarios, g.no_practicas, g.no_trabajos, w.no_alumnos FROM grupos g, planteles l, modalidades m, profesores p, asignaturas a, semestres s, vw_grupos_no_alumnos w WHERE (((((((g.id_plantel = l.id_plantel) AND (g.id_modalidad = m.id_modalidad)) AND (g.id_profesor = p.id_profesor)) AND (g.id_asignatura = a.id_asignatura)) AND (g.id_semestre = s.id_semestre)) AND (g.id_grupo = w.id_grupo)) AND (g.id_plantel = w.id_plantel)) ORDER BY g.descripcion, g.id_modalidad, g.clave;
+
+--
+-- TOC Entry ID 112 (OID 1036628)
+--
+-- Name: vw_comprobante Type: VIEW Owner: hugo
+--
+
+CREATE VIEW "vw_comprobante" as SELECT x.matricula, x.apellidos, x.nombres, p.apellidos AS apellidosp, p.nombres AS nombrep, u.descripcion AS aula, d.descripcion AS dia, g.hora_inicial, g.hora_final, x.clave AS grupo, l.descripcion AS plantel, x.descripcion AS asignatura, s.id_semestre, s.descripcion AS semestre, m.descripcion AS modalidad, d.clave AS claved FROM ((((((((vw_alumnos_x_grupo x LEFT JOIN profesores p ON ((x.id_profesor = p.id_profesor))) LEFT JOIN asignaturas n ON ((x.id_asignatura = n.id_asignatura))) LEFT JOIN planteles l ON ((x.id_plantel = l.id_plantel))) LEFT JOIN semestres s ON ((x.id_semestre = s.id_semestre))) LEFT JOIN modalidades m ON ((x.id_modalidad = m.id_modalidad))) LEFT JOIN grupos_horarios g ON (((x.id_grupo = g.id_grupo) AND (x.id_plantel = g.id_plantel)))) LEFT JOIN dias d ON ((d.clave = g.clave_dia))) LEFT JOIN aulas u ON ((u.id_aula = g.id_aula)));
+
+--
+-- Data for TOC Entry ID 142 (OID 824410)
+--
+-- Name: estados Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "estados"  FROM stdin;
+1	01	DISTRITO FEDERAL	2002-07-29	1	\N	\N
+\.
+--
+-- Data for TOC Entry ID 143 (OID 824449)
+--
+-- Name: delegaciones_municipios Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "delegaciones_municipios"  FROM stdin;
+1	1	ALVARO OBREGON	2002-07-29	1	2002-08-07	1
+2	1	AZCAPOTZALCO	2002-07-29	1	\N	\N
+3	1	BENITO JUAREZ	2002-07-29	1	\N	\N
+4	1	COYOACAN	2002-07-29	1	\N	\N
+5	1	CUAJIMALPA DE MORELOS	2002-07-29	1	\N	\N
+6	1	CUAUHTEMOC	2002-07-29	1	\N	\N
+7	1	GUSTAVO A. MADERO	2002-07-29	1	\N	\N
+8	1	IZTACALCO	2002-07-29	1	\N	\N
+9	1	IZTAPALAPA	2002-07-29	1	\N	\N
+10	1	MAGDALENA CONTRERAS	2002-07-29	1	\N	\N
+11	1	MIGUEL HIDALGO	2002-07-29	1	\N	\N
+12	1	MILPA ALTA	2002-07-29	1	\N	\N
+13	1	TLAHUAC	2002-07-29	1	\N	\N
+14	1	TLALPAN	2002-07-29	1	\N	\N
+15	1	VENUSTIANO CARRANZA	2002-07-29	1	2002-08-01	0
+16	1	XOCHIMILCO	2002-07-29	1	\N	\N
+\.
+--
+-- Data for TOC Entry ID 144 (OID 824488)
+--
+-- Name: planteles Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "planteles"  FROM stdin;
+1	01	IZTAPALAPA 1	2002-07-29	1	2002-08-08	1	\N	\N	\N
+2	02	ALVARO OBREGON 1	2002-07-29	1	\N	\N	\N	\N	\N
+3	03	AZCAPOTZALCO 1	2002-07-29	1	\N	\N	\N	\N	\N
+4	04	COYOACAN 1	2002-07-29	1	\N	\N	\N	\N	\N
+5	05	CUAJIMALPA 1	2002-07-29	1	2002-07-30	0	\N	\N	\N
+6	06	GUSTAVO A. MADERO 1	2002-07-29	1	\N	\N	\N	\N	\N
+7	07	GUSTAVO A. MADERO 2	2002-07-29	1	\N	\N	\N	\N	\N
+8	08	IZTACALCO 1	2002-07-29	1	\N	\N	\N	\N	\N
+9	09	IZTAPALAPA 2	2002-07-29	1	\N	\N	\N	\N	\N
+10	10	MAGDALENA CONTRERAS 1	2002-07-29	1	\N	\N	\N	\N	\N
+11	11	MIGUEL HIDALGO	2002-07-29	1	\N	\N	\N	\N	\N
+12	12	MILPA ALTA 1	2002-07-29	1	\N	\N	\N	\N	\N
+13	13	TLAHUAC 1	2002-07-29	1	\N	\N	\N	\N	\N
+14	14	TLALPAN 1	2002-07-29	1	\N	\N	\N	\N	\N
+15	15	TLALPAN 2	2002-07-29	1	\N	\N	\N	\N	\N
+16	16	XOCHIMILCO 1	2002-07-29	1	\N	\N	\N	\N	\N
+\.
+--
+-- Data for TOC Entry ID 145 (OID 824530)
+--
+-- Name: semestres Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "semestres"  FROM stdin;
+15	2003-2004 A	2003-06-27	22	2003-06-27	22	\N
+\.
+--
+-- Data for TOC Entry ID 146 (OID 824550)
+--
+-- Name: academias Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "academias"  FROM stdin;
+01	MATEMATICAS	2002-07-29	1	2002-08-06	1
+02	FISICA	2002-07-29	1	\N	\N
+03	QUIMICA	2002-07-29	1	\N	\N
+04	BIOLOGIA	2002-07-29	1	\N	\N
+05	LENGUA Y LITERATURA	2002-07-29	1	\N	\N
+06	HISTORIA	2002-07-29	1	\N	\N
+07	FILOSOFIA	2002-07-29	1	\N	\N
+08	MUSICA	2002-07-29	1	\N	\N
+09	ARTES PLASTICAS	2002-07-29	1	\N	\N
+10	ORGANIZACION Y PLANEACION	2002-07-29	1	\N	\N
+11	INGLES	2002-07-29	1	\N	\N
+12	COMPUTACION	2002-07-29	1	\N	\N
+AP	PROYECTO EJE	2003-05-06	104	\N	\N
+OP	OPTATIVA	2003-08-13	21	\N	\N
+\.
+--
+-- Data for TOC Entry ID 147 (OID 824568)
+--
+-- Name: areas Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "areas"  FROM stdin;
+01	CIENCIAS	2002-07-29	1	2002-08-06	1
+02	HUMANIDADES	2002-07-29	1	2002-08-06	1
+03	PRACTICAS	2002-07-29	1	2002-08-06	1
+04	TODAS PROYECTO EJE	2003-05-06	104	\N	\N
+OP	OPTATIVA	2003-08-13	21	\N	\N
+\.
+--
+-- Data for TOC Entry ID 148 (OID 824586)
+--
+-- Name: materias Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "materias"  FROM stdin;
+01	MATEMATICAS	01	2002-07-29	01	1	2002-08-01	0
+02	FISICA	01	2002-07-29	02	1	2002-08-01	0
+03	QUIMICA	01	2002-07-29	03	1	\N	\N
+04	BIOLOGIA	01	2002-07-29	04	1	\N	\N
+05	LENGUA Y LITERATURA	02	2002-07-29	05	1	\N	\N
+06	HISTORIA	02	2002-07-29	06	1	\N	\N
+07	FILOSOFIA	02	2002-07-29	07	1	\N	\N
+08	MUSICA	02	2002-07-29	08	1	2002-08-01	0
+11	INGLES	03	2002-07-29	11	1	\N	\N
+12	COMPUTACION	03	2002-07-29	12	1	\N	\N
+13	CALCULO I	01	2002-08-13	01	22	2002-08-13	22
+14	CALCULO II	01	2002-08-13	01	22	2002-08-13	22
+15	ESTADISTICA I	01	2002-08-13	01	22	\N	\N
+16	ESTADISTICA II	01	2002-08-13	01	22	\N	\N
+17	FILOSOFIA POLITICA	02	2002-08-13	07	22	\N	\N
+18	CULTURA LATINOAMERICANA	02	2002-08-13	07	22	\N	\N
+19	LUZ Y SONIDO	03	2002-08-13	02	22	\N	\N
+20	FISICA MODERNA	03	2002-08-13	02	22	\N	\N
+21	QUIMICA, ENERGIA Y SOCIEDAD	03	2002-08-13	03	22	\N	\N
+22	INTRODUCCION A LA GEOGRAFIA	02	2002-10-28	06	1	\N	\N
+23	CULTURA Y ESCRITURA	02	2002-10-28	07	1	\N	\N
+10	PLANEACION Y ORGANIZACION DEL ESTUDIO	03	2002-07-29	10	1	2002-08-01	0
+O9	FILOSOFIA AMBIENTAL	02	2003-04-15	07	21	\N	\N
+PE	PROYECTO EJE	04	2003-05-06	AP	104	\N	\N
+M1	OPTATIVA CALCULO	01	2003-08-13	01	21	\N	\N
+09	ARTES PLASTICAS	02	2002-07-29	09	1	2003-08-13	21
+M2	OPTATIVA TEMAS SELECTOS DE MATEMATICAS	01	2003-08-13	01	21	2003-08-13	21
+MU	MUSICA Y MOVIMIENTO	02	2003-08-18	08	21	\N	\N
+M3	OPTATIVA PROBABILIDAD Y ESTADISTICA	01	2003-08-20	01	22	\N	\N
+\.
+--
+-- Data for TOC Entry ID 149 (OID 824625)
+--
+-- Name: modalidades Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "modalidades"  FROM stdin;
+1	CURSO	t	2002-07-31	0	\N	\N
+2	TUTORIAS	f	2002-07-31	0	2002-07-31	0
+10	SEMINARIO	f	2002-07-20	21	2002-07-20	21
+3	TALLER	f	2002-07-31	0	2002-08-21	21
+11	GRUPO DE TRABAJO	t	2003-07-07	21	\N	\N
+13	SEGUIMIENTO INDIVIDUAL	t	2003-10-14	21	\N	\N
+\.
+--
+-- Data for TOC Entry ID 150 (OID 824664)
+--
+-- Name: situaciones_alumno Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "situaciones_alumno"  FROM stdin;
+1	ACTIVO	2002-07-29	1	\N	\N
+2	RECESO TEMPORAL	2002-07-29	1	\N	\N
+3	RECESO INDEFINIDO	2002-07-29	1	\N	\N
+4	CAMBIO DE PLANTEL	2003-08-07	0	\N	\N
+\.
+--
+-- Data for TOC Entry ID 151 (OID 824683)
+--
+-- Name: alumnos Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "alumnos"  FROM stdin;
+9901010003	AGUILAR LOPEZ 	JUANCHO	1	1	2001-08-13	1	\N	\N	1999-08-01	\N
+\.
+--
+-- Data for TOC Entry ID 152 (OID 824706)
+--
+-- Name: alumnos_x_grupo Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "alumnos_x_grupo"  FROM stdin;
+\.
+--
+-- Data for TOC Entry ID 153 (OID 824744)
+--
+-- Name: objetivos Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "objetivos"  FROM stdin;
+1	Es capaz de simbolizar problemas sencillos.	t	2001 	2002-12-03	1	\N	01	\N
+2	Conoce y maneja los nmeros naturales. Conoce sistemas antiguos de numeracin y maneja los nmeros en distintas bases.	t	2001 	2002-12-03	1	\N	01	\N
+3	Comprende y maneja los conceptos de mltiplo y divisor y la descomposicin de un nmero en sus factores primos.	t	2001 	2002-12-03	1	\N	01	\N
+\.
+--
+-- Data for TOC Entry ID 154 (OID 824785)
+--
+-- Name: periodos_evaluacion Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "periodos_evaluacion"  FROM stdin;
+1	NA	NO APLICA	2002-10-28	1	\N	\N
+2	P	PARCIAL	2002-10-28	1	\N	\N
+3	C	COMPENDIADA	2002-10-28	1	\N	\N
+4	I	INTERSEMESTRAL	2002-10-28	1	\N	\N
+\.
+--
+-- Data for TOC Entry ID 155 (OID 824824)
+--
+-- Name: recomendaciones Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "recomendaciones"  FROM stdin;
+1	NA	NO APLICA	2002-01-01	0	\N	\N
+2	AV	AVANZA	2002-01-01	0	\N	\N
+3	NV	NO AVANZA	2002-01-01	0	\N	\N
+4	IN	INTERSEMESTRE	2002-01-01	0	\N	\N
+\.
+--
+-- Data for TOC Entry ID 156 (OID 824844)
+--
+-- Name: recomendaciones_x_periodo Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "recomendaciones_x_periodo"  FROM stdin;
+\.
+--
+-- Data for TOC Entry ID 157 (OID 824877)
+--
+-- Name: aulas Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "aulas"  FROM stdin;
+25	SALON 1	2002-08-08	25	\N	\N
+26	SALON 2	2002-08-08	25	\N	\N
+27	SALON 3	2002-08-08	25	\N	\N
+28	SALON 4	2002-08-08	25	\N	\N
+29	SALON 5	2002-08-08	25	\N	\N
+30	SALON 6	2002-08-08	25	\N	\N
+31	SALON 7	2002-08-08	25	\N	\N
+32	SALON 8	2002-08-08	25	\N	\N
+33	SALON 9	2002-08-08	25	\N	\N
+34	SALON 10	2002-08-08	25	\N	\N
+35	SALON 11	2002-08-08	25	\N	\N
+36	SALON 12	2002-08-08	25	\N	\N
+37	SALON 13	2002-08-08	25	\N	\N
+38	SALON 14	2002-08-08	25	\N	\N
+39	LAB. QUIMICA	2002-08-08	25	2002-08-08	25
+40	LAB. FISICA	2002-08-08	25	\N	\N
+41	LAB. BIOLOGIA	2002-08-08	25	\N	\N
+42	LAB. COMPUTO	2002-08-12	32	\N	\N
+43	PRACTICA COMPUTO	2002-08-12	32	\N	\N
+44	PRACT. INGLES	2002-08-11	30	\N	\N
+45	TUTORIA COMPUTO	2002-08-12	1	\N	\N
+47	PRAC. PLANEACION	2002-08-12	30	2002-08-12	30
+46	SALON MUSICA	2002-08-12	25	2003-07-02	1
+\.
+--
+-- Data for TOC Entry ID 158 (OID 824896)
+--
+-- Name: dias Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "dias"  FROM stdin;
+1	DOMINGO
+2	LUNES
+3	MARTES
+4	MIERCOLES
+5	JUEVES
+6	VIERNES
+7	SABADO
+\.
+--
+-- Data for TOC Entry ID 159 (OID 824929)
+--
+-- Name: objetivos_x_asignatura Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "objetivos_x_asignatura"  FROM stdin;
+63	37	1	2002-10-30	1	\N	\N
+64	37	2	2002-10-30	1	\N	\N
+\.
+--
+-- Data for TOC Entry ID 160 (OID 824948)
+--
+-- Name: caracterizaciones Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "caracterizaciones"  FROM stdin;
+63	1.- Conoce la importancia y funcin de una computadora. \
+ 2.- Identifica una computadora por su tamao y tipo. \
+ 3.- Identifica los elementos b?icos de una computadora. Estructura f?ica (Hardware) Unidad central de proceso Identifica los dispositivos de entrada. Identifica los dispositivos de salida. Identifica la estructura lgica (Software). \
+\.
+--
+-- Data for TOC Entry ID 161 (OID 824985)
+--
+-- Name: estados_civiles Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "estados_civiles"  FROM stdin;
+1	SOLTERO	2002-08-06	1	\N	\N
+2	CASADO	2002-08-06	1	\N	\N
+3	OTRO	2002-08-06	1	\N	\N
+\.
+--
+-- Data for TOC Entry ID 162 (OID 825004)
+--
+-- Name: alumnos_generales Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "alumnos_generales"  FROM stdin;
+0205010267	CAMELIA	10	4	XALPA	9	09640	54270446	51120364	f	1986-06-23	\N	\N	2002-08-19	23	2003-10-07	21
+\.
+--
+-- Data for TOC Entry ID 163 (OID 825033)
+--
+-- Name: alumnos_situacion_log Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "alumnos_situacion_log"  FROM stdin;
+9902010413	1	2003-07-04	23	\N	\N		10:01:42	\N
+\.
+--
+-- Data for TOC Entry ID 164 (OID 825050)
+--
+-- Name: pga_queries Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "pga_queries"  FROM stdin;
+\.
+--
+-- Data for TOC Entry ID 165 (OID 825081)
+--
+-- Name: pga_forms Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "pga_forms"  FROM stdin;
+\.
+--
+-- Data for TOC Entry ID 166 (OID 825107)
+--
+-- Name: pga_scripts Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "pga_scripts"  FROM stdin;
+\.
+--
+-- Data for TOC Entry ID 167 (OID 825133)
+--
+-- Name: pga_reports Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "pga_reports"  FROM stdin;
+\.
+--
+-- Data for TOC Entry ID 168 (OID 825162)
+--
+-- Name: pga_schema Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "pga_schema"  FROM stdin;
+\.
+--
+-- Data for TOC Entry ID 169 (OID 825189)
+--
+-- Name: pga_layout Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "pga_layout"  FROM stdin;
+alumnos_x_grupo	7	matricula id_grupo id_plantel fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150
+areas	6	clave descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150
+alumnos_generales	17	matricula calle no_interior no_exterior colonia id_delegacion codigo_postal telefono telefono_alterno es_hombre fecha_nacimiento id_estado_civil no_hijos fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150
+academias	6	clave descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150
+delegaciones_municipios	7	id_delegacion id_estado descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150
+dias	2	clave descripcion	150 150
+situaciones_alumno	6	id_situacion descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150
+aulas	6	id_aula descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150
+planteles	7	id_plantel clave descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150
+estados	7	id_estado clave descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150
+profesores	19	id_profesor rfc apellidos nombres id_plantel calle no_interior no_exterior colonia id_delegacion codigo_postal telefono telefono_alterno es_hombre fecha_nacimiento fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150
+grupos_horarios	11	id_grupo id_plantel clave_dia hora_inicial id_aula hora_final es_laboratorio fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150 150 150 150 150
+vw_grupos_x_asignatura	13	id_grupo id_plantel clave descripcion id_modalidad id_profesor id_semestre id_asignatura clave_asignatura asignatura clave_materia id_asignatura_antecede semestre	150 150 150 150 150 150 150 150 150 150 150 150 150
+vw_alumnos_x_distinct_grupo	4	matricula apellidos nombres clave	150 150 150 150
+vw_horarios_inscripcion	15	matricula nombres apellidos id_plantel id_grupo clave id_asignatura id_semestre id_profesor profesor apellidos_prof asignatura clave_asigna semestre plantel	150 150 150 150 150 150 150 150 150 150 150 150 150 150 150
+vw_horarios_inscripcion_grupo	21	matricula nombres apellidos id_plantel id_grupo clave id_asignatura id_semestre id_profesor profesor apellidos_prof asignatura clave_asigna semestre plantel clave_dia hora_inicial id_aula hora_final descripcion aula	150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150
+vw_horarios_inscribe	14	matricula nombres apellidos clave profesor apellidos_prof asignatura clave_asigna semestre plantel hora_inicial hora_final descripcion aula	150 150 150 150 150 150 150 150 150 150 150 150 150 150
+estados_civiles	6	id_estado_civil descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150
+vw_comprobante	16	matricula apellidos nombres alumno apellidosp nombrep profesor aula dia hora_inicial hora_final grupo plantel asignatura semestre modalidad	150 150 150 150 150 150 150 150 150 150 150 150 150 150 150 150
+resultados	6	clave descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150
+objetivos_x_asignatura	7	id_objetivo id_asignatura consecutivo fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	68 89 75 80 87 86 109
+objetivos	9	id_objetivo descripcion es_esencial plan fecha_alta id_usuario_alta fecha_cambio clave_materia id_usuario_cambio	62 273 84 40 77 96 93 87 111
+materias	8	clave descripcion clave_area fecha_alta clave_academia id_usuario_alta fecha_cambio id_usuario_cambio	58 150 150 150 150 150 150 150
+asignaturas	10	id_asignatura descripcion clave id_asignatura_antecede fecha_alta id_usuario_alta fecha_cambio clave_materia id_usuario_cambio {semestre}	94 213 150 150 124 150 150 150 150 150
+caracterizaciones	6	id_objetivo descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	83 156 150 94 92 123
+grupos	19	id_grupo id_plantel clave descripcion id_modalidad id_profesor id_asignatura id_semestre no_clases no_tutorias no_laboratorios no_seminarios no_practicas no_trabajos fecha_alta id_usuario_alta fecha_cambio clave_materia id_usuario_cambio	103 92 88 112 101 150 150 150 150 150 150 150 150 150 150 150 150 150 150
+semestres	7	id_semestre descripcion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio posicion	150 150 150 150 150 150 150
+alumnos_situacion_log	6	matricula id_situacion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150
+evaluaciones_x_objetivo	8	matricula id_objetivo clave_resultado recomendacion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	150 150 150 150 150 150 150 150
+accesos_usuario	3	clave_modulo usuario_id acceso	150 150 150
+alumnos	11	matricula apellidos nombres id_plantel id_situacion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio fecha_ingreso curp	150 150 150 150 150 150 150 150 150 150 150
+aspirantes	27	folio id_plantel apellidos nombres calle no_exterior no_interior colonia id_delegacion codigo_postal telefono telefono_alterno es_hombre fecha_nacimiento anio_egreso_secundaria promedio_secundaria entrego_acta entrego_certificado entrego_comprobante no_sorteo turno matricula ya_inscrito id_usuario_alta fecha_alta id_usuario_cambio fecha_cambio	83 113 109 115 114 101 113 163 110 150 111 96 163 105 170 126 125 170 149 74 87 150 150 150 150 150 150
+consecutivos	4	matricula db_version folio folio_cambio_plantel	150 150 150 150
+evaluaciones_historico	12	matricula id_objetivo id_semestre id_grupo id_plantel id_periodo_evaluacion clave_resultado recomendacion fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio	72 77 92 56 79 135 131 110 125 91 114 183
+usuarios	11	usuario_id usuario contrasena nivel fecha_alta id_usuario_alta fecha_cambio id_usuario_cambio crear_usuario link_id tabla	150 150 150 150 150 150 150 150 150 150 150
+\.
+--
+-- Data for TOC Entry ID 170 (OID 825217)
+--
+-- Name: grupos_horarios Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "grupos_horarios"  FROM stdin;
+34	1	5	09:30:00	25	11:00:00	f	2002-08-08	25	\N	\N
+\.
+--
+-- Data for TOC Entry ID 171 (OID 825259)
+--
+-- Name: asignaturas Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "asignaturas"  FROM stdin;
+1	MATEMATICAS I	101111	1	2002-07-29	1	2002-08-07	01	1	1
+\.
+--
+-- Data for TOC Entry ID 172 (OID 825330)
+--
+-- Name: usuarios Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "usuarios"  FROM stdin;
+23	DAVID	snr`en	3	2002-08-07	1	\N	\N	\N	\N	\N
+1	ADMINISTRADOR	he`j`oox	1	2002-08-06	1	2003-01-08	1	t	\N	\N
+94	HUGO AYALA1708	0863	3	2003-01-08	1	2003-03-18	1	\N	263	PROFESORES
+\.
+--
+-- Data for TOC Entry ID 173 (OID 825373)
+--
+-- Name: grupos Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "grupos"  FROM stdin;
+34	1	1101	ORGANIZACION Y PLANEACION	1	222	32	7	\N	\N	\N	\N	\N	\N	2002-08-08	25	\N	10	\N
+\.
+--
+-- Data for TOC Entry ID 174 (OID 825405)
+--
+-- Name: consecutivos Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "consecutivos"  FROM stdin;
+226	4.2	765	11
+\.
+--
+-- Data for TOC Entry ID 175 (OID 825435)
+--
+-- Name: profesores Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "profesores"  FROM stdin;
+263	AAAH7208172N6	AYALA AMBROCIO	HUGO	1	\N	\N	\N	\N	9	\N	\N	\N	t	\N	2002-08-08	28	\N	\N	\N
+\.
+--
+-- Data for TOC Entry ID 176 (OID 825468)
+--
+-- Name: resultados Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "resultados"  FROM stdin;
+NA	NO APLICADA	0	2002-01-01	0	\N	\N
+C 	CUBIERTO	3	2002-01-01	0	\N	\N
+PC	PARCIALMENTE CUBIERTO	2	2002-01-01	0	\N	\N
+NC	NO CUBIERTO	1	2002-01-01	0	\N	\N
+\.
+--
+-- Data for TOC Entry ID 177 (OID 825487)
+--
+-- Name: evaluaciones_x_objetivo Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "evaluaciones_x_objetivo"  FROM stdin;
+0104011130	1	NC		2003-01-06	84	\N	\N
+\.
+--
+-- Data for TOC Entry ID 178 (OID 825507)
+--
+-- Name: evaluaciones_historico Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "evaluaciones_historico"  FROM stdin;
+0104011076	25	5	\N	1	\N	NC	Recursar el objetivo	2003-03-20	1	\N	\N
+\.
+--
+-- Data for TOC Entry ID 179 (OID 825531)
+--
+-- Name: evaluaciones Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "evaluaciones"  FROM stdin;
+0003010771	1402	1	\N	15	2	30	6	\N	\N	\N	6	Que cubra en tutor?s los objetivos pendientes	2003-10-17	60	2004-01-21	60
+\.
+--
+-- Data for TOC Entry ID 180 (OID 825560)
+--
+-- Name: accesos_usuario Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "accesos_usuario"  FROM stdin;
+IN	103	16383
+IN	104	16383
+EV	103	28673
+EV	104	28673
+IN	23	4095
+IN	25	4095
+IN	26	4095
+IN	28	4095
+IN	30	4095
+IN	32	4095
+IN	99	4095
+EV	35	1
+EV	37	1
+EV	38	1
+EV	41	1
+EV	42	1
+EV	43	1
+EV	44	1
+EV	45	1
+EV	47	1
+EV	49	1
+EV	50	1
+EV	53	1
+EV	54	1
+EV	55	1
+EV	56	1
+EV	58	1
+EV	59	1
+EV	60	1
+EV	61	1
+EV	62	1
+EV	64	1
+EV	65	1
+EV	66	1
+EV	67	1
+EV	70	1
+EV	71	1
+EV	73	1
+EV	74	1
+EV	76	1
+EV	77	1
+EV	79	1
+EV	80	1
+EV	81	1
+EV	82	1
+EV	85	1
+EV	89	1
+EV	34	1
+EV	72	1
+EV	92	1
+EV	93	1
+EV	97	1
+EV	96	1
+EV	100	1
+EV	101	1
+EV	102	1
+EV	78	1
+EV	94	1
+EV	105	1
+EV	39	1
+EV	51	1
+EV	40	1
+EV	86	1
+EV	83	1
+EV	63	1
+EV	46	1
+EV	75	1
+EV	57	1
+EV	106	1
+EV	48	1
+EV	69	8193
+IN	111	3968
+EV	95	1
+EV	112	1
+EV	68	1
+EV	33	1
+EV	21	0
+IN	22	118656
+IN	27	3968
+IN	108	0
+IN	107	17920
+IN	98	69631
+EV	113	1
+EV	84	1
+IN	21	126975
+EV	114	1
+EV	115	1
+EV	116	1
+IN	1	131071
+EV	1	28673
+EV	87	1
+\.
+--
+-- Data for TOC Entry ID 181 (OID 965243)
+--
+-- Name: aspirantes Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "aspirantes"  FROM stdin;
+0100037	1	CANALES RAMIREZ	ANA LAURA	PRIV. LAURELES MZ 50	LT 21	\N	XALPA	9	09860	5556146548	\N	f	1984-10-05	2000	6.8	t	t	t	\N	\N	\N	f	107	2003-07-14	107	2003-07-14
+0100746	1	VARGAS ARTEAGA	GUILLERMO	JOSELITO HUERTA MZ 3	LT 4	\N	SAN MIGUEL TEOTONGO	9	09630	26354646	\N	t	1985-11-27	2001	6.9	t	t	t	121	\N	0306010186   	t	110	2003-07-18	21	2003-08-15
+\.
+--
+-- Data for TOC Entry ID 182 (OID 965294)
+--
+-- Name: colonias Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "colonias"  FROM stdin;
+1a. AMPLIACION SANTIAGO ACAHUALTEPEC 	9	\N	1	\N	\N	\N
+\.
+
+
+--
+-- Data for TOC Entry ID 184 (OID 1007733)
+--
+-- Name: registro_cambio_plantel Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "registro_cambio_plantel"  FROM stdin;
+9902010404	01	11		011100001	2003-09-17	21
+\.
+--
+-- Data for TOC Entry ID 185 (OID 1016592)
+--
+-- Name: asistencias Type: TABLE DATA Owner: hugo
+--
+
+
+COPY "asistencias"  FROM stdin;
+1	1625	1	2003-10-20	2003-10-20	71	\N	\N
+\.
+--
+-- TOC Entry ID 113 (OID 824410)
+--
+-- Name: "xak1estados" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1estados" on "estados" using btree ( "clave" "varchar_ops" );
+
+--
+-- TOC Entry ID 114 (OID 824410)
+--
+-- Name: "xak2estados" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak2estados" on "estados" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 115 (OID 824449)
+--
+-- Name: "xak1delegaciones_municipios" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1delegaciones_municipios" on "delegaciones_municipios" using btree ( "id_estado" "int4_ops", "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 116 (OID 824488)
+--
+-- Name: "xak1planteles" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1planteles" on "planteles" using btree ( "clave" "varchar_ops" );
+
+--
+-- TOC Entry ID 117 (OID 824488)
+--
+-- Name: "xak2planteles" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak2planteles" on "planteles" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 118 (OID 824530)
+--
+-- Name: "xak1semestres" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1semestres" on "semestres" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 119 (OID 824550)
+--
+-- Name: "xak1academias" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1academias" on "academias" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 120 (OID 824568)
+--
+-- Name: "xak1areas" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1areas" on "areas" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 121 (OID 824586)
+--
+-- Name: "xak1materias" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1materias" on "materias" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 122 (OID 824625)
+--
+-- Name: "xak1modalidades" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1modalidades" on "modalidades" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 123 (OID 824664)
+--
+-- Name: "xak1situaciones_alumno" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1situaciones_alumno" on "situaciones_alumno" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 124 (OID 824683)
+--
+-- Name: "xie1alumnos" Type: INDEX Owner: hugo
+--
+
+CREATE  INDEX "xie1alumnos" on "alumnos" using btree ( "apellidos" "varchar_ops", "nombres" "varchar_ops" );
+
+--
+-- TOC Entry ID 125 (OID 824785)
+--
+-- Name: "xak1periodos_evaluacion" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1periodos_evaluacion" on "periodos_evaluacion" using btree ( "clave" "varchar_ops" );
+
+--
+-- TOC Entry ID 126 (OID 824785)
+--
+-- Name: "xak2periodos_evaluacion" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak2periodos_evaluacion" on "periodos_evaluacion" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 127 (OID 824824)
+--
+-- Name: "xak1recomendaciones" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1recomendaciones" on "recomendaciones" using btree ( "clave" "bpchar_ops" );
+
+--
+-- TOC Entry ID 128 (OID 824824)
+--
+-- Name: "xak2recomendaciones" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak2recomendaciones" on "recomendaciones" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 129 (OID 824877)
+--
+-- Name: "xak1aulas" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1aulas" on "aulas" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 130 (OID 824985)
+--
+-- Name: "xak1estados_civiles" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1estados_civiles" on "estados_civiles" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 137 (OID 825004)
+--
+-- Name: "xpkalumnosgenerales" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xpkalumnosgenerales" on "alumnos_generales" using btree ( "matricula" "bpchar_ops" );
+
+--
+-- TOC Entry ID 131 (OID 825259)
+--
+-- Name: "xak2asignaturas" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak2asignaturas" on "asignaturas" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 132 (OID 825259)
+--
+-- Name: "xak1asignaturas" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1asignaturas" on "asignaturas" using btree ( "clave" "bpchar_ops" );
+
+--
+-- TOC Entry ID 133 (OID 825373)
+--
+-- Name: "grupos_id_grupo_key" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "grupos_id_grupo_key" on "grupos" using btree ( "id_grupo" "int4_ops" );
+
+--
+-- TOC Entry ID 134 (OID 825373)
+--
+-- Name: "ak1grupos" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "ak1grupos" on "grupos" using btree ( "id_plantel" "int4_ops", "clave" "bpchar_ops", "id_modalidad" "int4_ops", "id_asignatura" "int4_ops", "id_semestre" "int4_ops", "clave_materia" "bpchar_ops" );
+
+--
+-- TOC Entry ID 135 (OID 825435)
+--
+-- Name: "xak1profesores" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1profesores" on "profesores" using btree ( "rfc" "bpchar_ops" );
+
+--
+-- TOC Entry ID 136 (OID 825468)
+--
+-- Name: "xak1resultados" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xak1resultados" on "resultados" using btree ( "descripcion" "varchar_ops" );
+
+--
+-- TOC Entry ID 138 (OID 1016592)
+--
+-- Name: "xpkasistencias" Type: INDEX Owner: hugo
+--
+
+CREATE UNIQUE INDEX "xpkasistencias" on "asistencias" using btree ( "id_grupo" "int4_ops", "fecha_asistencia" "date_ops" );
+
+--
+-- TOC Entry ID 188 (OID 964249)
+--
+-- Name: "RI_ConstraintTrigger_964248" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "delegaciones_municipios"  FROM "estados" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'delegaciones_municipios', 'estados', 'UNSPECIFIED', 'id_estado', 'id_estado');
+
+--
+-- TOC Entry ID 186 (OID 964251)
+--
+-- Name: "RI_ConstraintTrigger_964250" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "estados"  FROM "delegaciones_municipios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'delegaciones_municipios', 'estados', 'UNSPECIFIED', 'id_estado', 'id_estado');
+
+--
+-- TOC Entry ID 187 (OID 964253)
+--
+-- Name: "RI_ConstraintTrigger_964252" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "estados"  FROM "delegaciones_municipios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'delegaciones_municipios', 'estados', 'UNSPECIFIED', 'id_estado', 'id_estado');
+
+--
+-- TOC Entry ID 217 (OID 964255)
+--
+-- Name: "RI_ConstraintTrigger_964254" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "materias"  FROM "academias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'materias', 'academias', 'UNSPECIFIED', 'clave_academia', 'clave');
+
+--
+-- TOC Entry ID 213 (OID 964257)
+--
+-- Name: "RI_ConstraintTrigger_964256" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "academias"  FROM "materias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'materias', 'academias', 'UNSPECIFIED', 'clave_academia', 'clave');
+
+--
+-- TOC Entry ID 214 (OID 964259)
+--
+-- Name: "RI_ConstraintTrigger_964258" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "academias"  FROM "materias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'materias', 'academias', 'UNSPECIFIED', 'clave_academia', 'clave');
+
+--
+-- TOC Entry ID 218 (OID 964261)
+--
+-- Name: "RI_ConstraintTrigger_964260" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "materias"  FROM "areas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'materias', 'areas', 'UNSPECIFIED', 'clave_area', 'clave');
+
+--
+-- TOC Entry ID 215 (OID 964263)
+--
+-- Name: "RI_ConstraintTrigger_964262" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "areas"  FROM "materias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'materias', 'areas', 'UNSPECIFIED', 'clave_area', 'clave');
+
+--
+-- TOC Entry ID 216 (OID 964265)
+--
+-- Name: "RI_ConstraintTrigger_964264" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "areas"  FROM "materias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'materias', 'areas', 'UNSPECIFIED', 'clave_area', 'clave');
+
+--
+-- TOC Entry ID 231 (OID 964267)
+--
+-- Name: "RI_ConstraintTrigger_964266" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos"  FROM "situaciones_alumno" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos', 'situaciones_alumno', 'UNSPECIFIED', 'id_situacion', 'id_situacion');
+
+--
+-- TOC Entry ID 227 (OID 964269)
+--
+-- Name: "RI_ConstraintTrigger_964268" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "situaciones_alumno"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos', 'situaciones_alumno', 'UNSPECIFIED', 'id_situacion', 'id_situacion');
+
+--
+-- TOC Entry ID 228 (OID 964271)
+--
+-- Name: "RI_ConstraintTrigger_964270" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "situaciones_alumno"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos', 'situaciones_alumno', 'UNSPECIFIED', 'id_situacion', 'id_situacion');
+
+--
+-- TOC Entry ID 232 (OID 964273)
+--
+-- Name: "RI_ConstraintTrigger_964272" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos"  FROM "planteles" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 197 (OID 964275)
+--
+-- Name: "RI_ConstraintTrigger_964274" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "planteles"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 198 (OID 964277)
+--
+-- Name: "RI_ConstraintTrigger_964276" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "planteles"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 243 (OID 964279)
+--
+-- Name: "RI_ConstraintTrigger_964278" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos_x_grupo"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos_x_grupo', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 233 (OID 964281)
+--
+-- Name: "RI_ConstraintTrigger_964280" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "alumnos"  FROM "alumnos_x_grupo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos_x_grupo', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 234 (OID 964283)
+--
+-- Name: "RI_ConstraintTrigger_964282" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "alumnos"  FROM "alumnos_x_grupo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos_x_grupo', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 247 (OID 964285)
+--
+-- Name: "RI_ConstraintTrigger_964284" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "objetivos"  FROM "materias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'objetivos', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 219 (OID 964287)
+--
+-- Name: "RI_ConstraintTrigger_964286" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "materias"  FROM "objetivos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'objetivos', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 220 (OID 964289)
+--
+-- Name: "RI_ConstraintTrigger_964288" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "materias"  FROM "objetivos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'objetivos', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 266 (OID 964291)
+--
+-- Name: "RI_ConstraintTrigger_964290" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "recomendaciones_x_periodo"  FROM "recomendaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'recomendaciones_x_periodo', 'recomendaciones', 'UNSPECIFIED', 'id_recomendacion', 'id_recomendacion');
+
+--
+-- TOC Entry ID 262 (OID 964293)
+--
+-- Name: "RI_ConstraintTrigger_964292" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "recomendaciones"  FROM "recomendaciones_x_periodo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'recomendaciones_x_periodo', 'recomendaciones', 'UNSPECIFIED', 'id_recomendacion', 'id_recomendacion');
+
+--
+-- TOC Entry ID 263 (OID 964295)
+--
+-- Name: "RI_ConstraintTrigger_964294" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "recomendaciones"  FROM "recomendaciones_x_periodo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'recomendaciones_x_periodo', 'recomendaciones', 'UNSPECIFIED', 'id_recomendacion', 'id_recomendacion');
+
+--
+-- TOC Entry ID 267 (OID 964297)
+--
+-- Name: "RI_ConstraintTrigger_964296" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "recomendaciones_x_periodo"  FROM "periodos_evaluacion" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'recomendaciones_x_periodo', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 256 (OID 964299)
+--
+-- Name: "RI_ConstraintTrigger_964298" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "periodos_evaluacion"  FROM "recomendaciones_x_periodo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'recomendaciones_x_periodo', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 257 (OID 964301)
+--
+-- Name: "RI_ConstraintTrigger_964300" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "periodos_evaluacion"  FROM "recomendaciones_x_periodo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'recomendaciones_x_periodo', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 272 (OID 964303)
+--
+-- Name: "RI_ConstraintTrigger_964302" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "objetivos_x_asignatura"  FROM "objetivos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'objetivos_x_asignatura', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 248 (OID 964305)
+--
+-- Name: "RI_ConstraintTrigger_964304" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "objetivos"  FROM "objetivos_x_asignatura" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'objetivos_x_asignatura', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 249 (OID 964307)
+--
+-- Name: "RI_ConstraintTrigger_964306" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "objetivos"  FROM "objetivos_x_asignatura" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'objetivos_x_asignatura', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 273 (OID 964309)
+--
+-- Name: "RI_ConstraintTrigger_964308" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "caracterizaciones"  FROM "objetivos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'caracterizaciones', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 250 (OID 964311)
+--
+-- Name: "RI_ConstraintTrigger_964310" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "objetivos"  FROM "caracterizaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'caracterizaciones', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 251 (OID 964313)
+--
+-- Name: "RI_ConstraintTrigger_964312" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "objetivos"  FROM "caracterizaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'caracterizaciones', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 276 (OID 964315)
+--
+-- Name: "RI_ConstraintTrigger_964314" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos_generales"  FROM "estados_civiles" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos_generales', 'estados_civiles', 'UNSPECIFIED', 'id_estado_civil', 'id_estado_civil');
+
+--
+-- TOC Entry ID 274 (OID 964317)
+--
+-- Name: "RI_ConstraintTrigger_964316" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "estados_civiles"  FROM "alumnos_generales" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos_generales', 'estados_civiles', 'UNSPECIFIED', 'id_estado_civil', 'id_estado_civil');
+
+--
+-- TOC Entry ID 275 (OID 964319)
+--
+-- Name: "RI_ConstraintTrigger_964318" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "estados_civiles"  FROM "alumnos_generales" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos_generales', 'estados_civiles', 'UNSPECIFIED', 'id_estado_civil', 'id_estado_civil');
+
+--
+-- TOC Entry ID 277 (OID 964321)
+--
+-- Name: "RI_ConstraintTrigger_964320" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos_generales"  FROM "delegaciones_municipios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos_generales', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 189 (OID 964323)
+--
+-- Name: "RI_ConstraintTrigger_964322" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "delegaciones_municipios"  FROM "alumnos_generales" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos_generales', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 190 (OID 964325)
+--
+-- Name: "RI_ConstraintTrigger_964324" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "delegaciones_municipios"  FROM "alumnos_generales" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos_generales', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 278 (OID 964327)
+--
+-- Name: "RI_ConstraintTrigger_964326" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos_generales"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos_generales', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 235 (OID 964329)
+--
+-- Name: "RI_ConstraintTrigger_964328" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "alumnos"  FROM "alumnos_generales" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos_generales', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 236 (OID 964331)
+--
+-- Name: "RI_ConstraintTrigger_964330" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "alumnos"  FROM "alumnos_generales" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos_generales', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 279 (OID 964333)
+--
+-- Name: "RI_ConstraintTrigger_964332" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos_situacion_log"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos_situacion_log', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 237 (OID 964335)
+--
+-- Name: "RI_ConstraintTrigger_964334" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "alumnos"  FROM "alumnos_situacion_log" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos_situacion_log', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 238 (OID 964337)
+--
+-- Name: "RI_ConstraintTrigger_964336" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "alumnos"  FROM "alumnos_situacion_log" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos_situacion_log', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 280 (OID 964339)
+--
+-- Name: "RI_ConstraintTrigger_964338" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos_situacion_log"  FROM "situaciones_alumno" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos_situacion_log', 'situaciones_alumno', 'UNSPECIFIED', 'id_situacion', 'id_situacion');
+
+--
+-- TOC Entry ID 229 (OID 964341)
+--
+-- Name: "RI_ConstraintTrigger_964340" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "situaciones_alumno"  FROM "alumnos_situacion_log" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos_situacion_log', 'situaciones_alumno', 'UNSPECIFIED', 'id_situacion', 'id_situacion');
+
+--
+-- TOC Entry ID 230 (OID 964343)
+--
+-- Name: "RI_ConstraintTrigger_964342" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "situaciones_alumno"  FROM "alumnos_situacion_log" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos_situacion_log', 'situaciones_alumno', 'UNSPECIFIED', 'id_situacion', 'id_situacion');
+
+--
+-- TOC Entry ID 281 (OID 964345)
+--
+-- Name: "RI_ConstraintTrigger_964344" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos_horarios"  FROM "aulas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos_horarios', 'aulas', 'UNSPECIFIED', 'id_aula', 'id_aula');
+
+--
+-- TOC Entry ID 268 (OID 964347)
+--
+-- Name: "RI_ConstraintTrigger_964346" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "aulas"  FROM "grupos_horarios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos_horarios', 'aulas', 'UNSPECIFIED', 'id_aula', 'id_aula');
+
+--
+-- TOC Entry ID 269 (OID 964349)
+--
+-- Name: "RI_ConstraintTrigger_964348" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "aulas"  FROM "grupos_horarios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos_horarios', 'aulas', 'UNSPECIFIED', 'id_aula', 'id_aula');
+
+--
+-- TOC Entry ID 282 (OID 964351)
+--
+-- Name: "RI_ConstraintTrigger_964350" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos_horarios"  FROM "dias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos_horarios', 'dias', 'UNSPECIFIED', 'clave_dia', 'clave');
+
+--
+-- TOC Entry ID 270 (OID 964353)
+--
+-- Name: "RI_ConstraintTrigger_964352" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "dias"  FROM "grupos_horarios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos_horarios', 'dias', 'UNSPECIFIED', 'clave_dia', 'clave');
+
+--
+-- TOC Entry ID 271 (OID 964355)
+--
+-- Name: "RI_ConstraintTrigger_964354" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "dias"  FROM "grupos_horarios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos_horarios', 'dias', 'UNSPECIFIED', 'clave_dia', 'clave');
+
+--
+-- TOC Entry ID 284 (OID 964357)
+--
+-- Name: "RI_ConstraintTrigger_964356" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "asignaturas"  FROM "asignaturas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'asignaturas', 'asignaturas', 'UNSPECIFIED', 'id_asignatura_antecede', 'id_asignatura');
+
+--
+-- TOC Entry ID 285 (OID 964359)
+--
+-- Name: "RI_ConstraintTrigger_964358" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "asignaturas"  FROM "asignaturas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'asignaturas', 'asignaturas', 'UNSPECIFIED', 'id_asignatura_antecede', 'id_asignatura');
+
+--
+-- TOC Entry ID 286 (OID 964361)
+--
+-- Name: "RI_ConstraintTrigger_964360" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "asignaturas"  FROM "asignaturas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'asignaturas', 'asignaturas', 'UNSPECIFIED', 'id_asignatura_antecede', 'id_asignatura');
+
+--
+-- TOC Entry ID 287 (OID 964363)
+--
+-- Name: "RI_ConstraintTrigger_964362" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "asignaturas"  FROM "materias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'asignaturas', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 221 (OID 964365)
+--
+-- Name: "RI_ConstraintTrigger_964364" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "materias"  FROM "asignaturas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'asignaturas', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 222 (OID 964367)
+--
+-- Name: "RI_ConstraintTrigger_964366" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "materias"  FROM "asignaturas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'asignaturas', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 292 (OID 964381)
+--
+-- Name: "RI_ConstraintTrigger_964380" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos"  FROM "planteles" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 199 (OID 964383)
+--
+-- Name: "RI_ConstraintTrigger_964382" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "planteles"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 200 (OID 964385)
+--
+-- Name: "RI_ConstraintTrigger_964384" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "planteles"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 293 (OID 964387)
+--
+-- Name: "RI_ConstraintTrigger_964386" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos"  FROM "semestres" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 207 (OID 964389)
+--
+-- Name: "RI_ConstraintTrigger_964388" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "semestres"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 208 (OID 964391)
+--
+-- Name: "RI_ConstraintTrigger_964390" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "semestres"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 294 (OID 964393)
+--
+-- Name: "RI_ConstraintTrigger_964392" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos"  FROM "materias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 223 (OID 964395)
+--
+-- Name: "RI_ConstraintTrigger_964394" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "materias"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 224 (OID 964397)
+--
+-- Name: "RI_ConstraintTrigger_964396" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "materias"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos', 'materias', 'UNSPECIFIED', 'clave_materia', 'clave');
+
+--
+-- TOC Entry ID 295 (OID 964399)
+--
+-- Name: "RI_ConstraintTrigger_964398" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos"  FROM "asignaturas" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos', 'asignaturas', 'UNSPECIFIED', 'id_asignatura', 'id_asignatura');
+
+--
+-- TOC Entry ID 288 (OID 964401)
+--
+-- Name: "RI_ConstraintTrigger_964400" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "asignaturas"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos', 'asignaturas', 'UNSPECIFIED', 'id_asignatura', 'id_asignatura');
+
+--
+-- TOC Entry ID 289 (OID 964403)
+--
+-- Name: "RI_ConstraintTrigger_964402" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "asignaturas"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos', 'asignaturas', 'UNSPECIFIED', 'id_asignatura', 'id_asignatura');
+
+--
+-- TOC Entry ID 296 (OID 964405)
+--
+-- Name: "RI_ConstraintTrigger_964404" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos"  FROM "modalidades" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos', 'modalidades', 'UNSPECIFIED', 'id_modalidad', 'id_modalidad');
+
+--
+-- TOC Entry ID 225 (OID 964407)
+--
+-- Name: "RI_ConstraintTrigger_964406" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "modalidades"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos', 'modalidades', 'UNSPECIFIED', 'id_modalidad', 'id_modalidad');
+
+--
+-- TOC Entry ID 226 (OID 964409)
+--
+-- Name: "RI_ConstraintTrigger_964408" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "modalidades"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos', 'modalidades', 'UNSPECIFIED', 'id_modalidad', 'id_modalidad');
+
+--
+-- TOC Entry ID 306 (OID 964411)
+--
+-- Name: "RI_ConstraintTrigger_964410" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "profesores"  FROM "delegaciones_municipios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'profesores', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 191 (OID 964413)
+--
+-- Name: "RI_ConstraintTrigger_964412" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "delegaciones_municipios"  FROM "profesores" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'profesores', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 192 (OID 964415)
+--
+-- Name: "RI_ConstraintTrigger_964414" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "delegaciones_municipios"  FROM "profesores" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'profesores', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 307 (OID 964417)
+--
+-- Name: "RI_ConstraintTrigger_964416" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "profesores"  FROM "planteles" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'profesores', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 201 (OID 964419)
+--
+-- Name: "RI_ConstraintTrigger_964418" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "planteles"  FROM "profesores" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'profesores', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 202 (OID 964421)
+--
+-- Name: "RI_ConstraintTrigger_964420" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "planteles"  FROM "profesores" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'profesores', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 297 (OID 964423)
+--
+-- Name: "RI_ConstraintTrigger_964422" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos"  FROM "profesores" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos', 'profesores', 'UNSPECIFIED', 'id_profesor', 'id_profesor');
+
+--
+-- TOC Entry ID 308 (OID 964425)
+--
+-- Name: "RI_ConstraintTrigger_964424" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "profesores"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos', 'profesores', 'UNSPECIFIED', 'id_profesor', 'id_profesor');
+
+--
+-- TOC Entry ID 309 (OID 964427)
+--
+-- Name: "RI_ConstraintTrigger_964426" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "profesores"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos', 'profesores', 'UNSPECIFIED', 'id_profesor', 'id_profesor');
+
+--
+-- TOC Entry ID 283 (OID 964429)
+--
+-- Name: "RI_ConstraintTrigger_964428" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "grupos_horarios"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'grupos_horarios', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 298 (OID 964431)
+--
+-- Name: "RI_ConstraintTrigger_964430" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "grupos"  FROM "grupos_horarios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'grupos_horarios', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 299 (OID 964433)
+--
+-- Name: "RI_ConstraintTrigger_964432" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "grupos"  FROM "grupos_horarios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'grupos_horarios', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 244 (OID 964435)
+--
+-- Name: "RI_ConstraintTrigger_964434" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "alumnos_x_grupo"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'alumnos_x_grupo', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 300 (OID 964437)
+--
+-- Name: "RI_ConstraintTrigger_964436" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "grupos"  FROM "alumnos_x_grupo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'alumnos_x_grupo', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 301 (OID 964439)
+--
+-- Name: "RI_ConstraintTrigger_964438" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "grupos"  FROM "alumnos_x_grupo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'alumnos_x_grupo', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 314 (OID 964441)
+--
+-- Name: "RI_ConstraintTrigger_964440" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_x_objetivo"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_x_objetivo', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 239 (OID 964443)
+--
+-- Name: "RI_ConstraintTrigger_964442" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "alumnos"  FROM "evaluaciones_x_objetivo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_x_objetivo', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 240 (OID 964445)
+--
+-- Name: "RI_ConstraintTrigger_964444" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "alumnos"  FROM "evaluaciones_x_objetivo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_x_objetivo', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 315 (OID 964447)
+--
+-- Name: "RI_ConstraintTrigger_964446" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_x_objetivo"  FROM "resultados" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_x_objetivo', 'resultados', 'UNSPECIFIED', 'clave_resultado', 'clave');
+
+--
+-- TOC Entry ID 310 (OID 964449)
+--
+-- Name: "RI_ConstraintTrigger_964448" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "resultados"  FROM "evaluaciones_x_objetivo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_x_objetivo', 'resultados', 'UNSPECIFIED', 'clave_resultado', 'clave');
+
+--
+-- TOC Entry ID 311 (OID 964451)
+--
+-- Name: "RI_ConstraintTrigger_964450" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "resultados"  FROM "evaluaciones_x_objetivo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_x_objetivo', 'resultados', 'UNSPECIFIED', 'clave_resultado', 'clave');
+
+--
+-- TOC Entry ID 316 (OID 964453)
+--
+-- Name: "RI_ConstraintTrigger_964452" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_x_objetivo"  FROM "objetivos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_x_objetivo', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 252 (OID 964455)
+--
+-- Name: "RI_ConstraintTrigger_964454" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "objetivos"  FROM "evaluaciones_x_objetivo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_x_objetivo', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 253 (OID 964457)
+--
+-- Name: "RI_ConstraintTrigger_964456" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "objetivos"  FROM "evaluaciones_x_objetivo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_x_objetivo', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 317 (OID 964459)
+--
+-- Name: "RI_ConstraintTrigger_964458" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_historico"  FROM "alumnos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_historico', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 241 (OID 964461)
+--
+-- Name: "RI_ConstraintTrigger_964460" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "alumnos"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_historico', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 242 (OID 964463)
+--
+-- Name: "RI_ConstraintTrigger_964462" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "alumnos"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_historico', 'alumnos', 'UNSPECIFIED', 'matricula', 'matricula');
+
+--
+-- TOC Entry ID 318 (OID 964465)
+--
+-- Name: "RI_ConstraintTrigger_964464" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_historico"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_historico', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 302 (OID 964467)
+--
+-- Name: "RI_ConstraintTrigger_964466" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "grupos"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_historico', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 303 (OID 964469)
+--
+-- Name: "RI_ConstraintTrigger_964468" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "grupos"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_historico', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 319 (OID 964471)
+--
+-- Name: "RI_ConstraintTrigger_964470" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_historico"  FROM "resultados" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_historico', 'resultados', 'UNSPECIFIED', 'clave_resultado', 'clave');
+
+--
+-- TOC Entry ID 312 (OID 964473)
+--
+-- Name: "RI_ConstraintTrigger_964472" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "resultados"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_historico', 'resultados', 'UNSPECIFIED', 'clave_resultado', 'clave');
+
+--
+-- TOC Entry ID 313 (OID 964475)
+--
+-- Name: "RI_ConstraintTrigger_964474" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "resultados"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_historico', 'resultados', 'UNSPECIFIED', 'clave_resultado', 'clave');
+
+--
+-- TOC Entry ID 320 (OID 964477)
+--
+-- Name: "RI_ConstraintTrigger_964476" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_historico"  FROM "objetivos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_historico', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 254 (OID 964479)
+--
+-- Name: "RI_ConstraintTrigger_964478" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "objetivos"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_historico', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 255 (OID 964481)
+--
+-- Name: "RI_ConstraintTrigger_964480" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "objetivos"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_historico', 'objetivos', 'UNSPECIFIED', 'id_objetivo', 'id_objetivo');
+
+--
+-- TOC Entry ID 321 (OID 964483)
+--
+-- Name: "RI_ConstraintTrigger_964482" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_historico"  FROM "periodos_evaluacion" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_historico', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 258 (OID 964485)
+--
+-- Name: "RI_ConstraintTrigger_964484" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "periodos_evaluacion"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_historico', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 259 (OID 964487)
+--
+-- Name: "RI_ConstraintTrigger_964486" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "periodos_evaluacion"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_historico', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 322 (OID 964489)
+--
+-- Name: "RI_ConstraintTrigger_964488" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones_historico"  FROM "semestres" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones_historico', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 209 (OID 964491)
+--
+-- Name: "RI_ConstraintTrigger_964490" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "semestres"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones_historico', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 210 (OID 964493)
+--
+-- Name: "RI_ConstraintTrigger_964492" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "semestres"  FROM "evaluaciones_historico" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones_historico', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 323 (OID 964495)
+--
+-- Name: "RI_ConstraintTrigger_964494" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones"  FROM "alumnos_x_grupo" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones', 'alumnos_x_grupo', 'UNSPECIFIED', 'matricula', 'matricula', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 245 (OID 964497)
+--
+-- Name: "RI_ConstraintTrigger_964496" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "alumnos_x_grupo"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones', 'alumnos_x_grupo', 'UNSPECIFIED', 'matricula', 'matricula', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 246 (OID 964499)
+--
+-- Name: "RI_ConstraintTrigger_964498" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "alumnos_x_grupo"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones', 'alumnos_x_grupo', 'UNSPECIFIED', 'matricula', 'matricula', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 324 (OID 964501)
+--
+-- Name: "RI_ConstraintTrigger_964500" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones"  FROM "recomendaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones', 'recomendaciones', 'UNSPECIFIED', 'id_recomendacion', 'id_recomendacion');
+
+--
+-- TOC Entry ID 264 (OID 964503)
+--
+-- Name: "RI_ConstraintTrigger_964502" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "recomendaciones"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones', 'recomendaciones', 'UNSPECIFIED', 'id_recomendacion', 'id_recomendacion');
+
+--
+-- TOC Entry ID 265 (OID 964505)
+--
+-- Name: "RI_ConstraintTrigger_964504" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "recomendaciones"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones', 'recomendaciones', 'UNSPECIFIED', 'id_recomendacion', 'id_recomendacion');
+
+--
+-- TOC Entry ID 325 (OID 964507)
+--
+-- Name: "RI_ConstraintTrigger_964506" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones"  FROM "periodos_evaluacion" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 260 (OID 964509)
+--
+-- Name: "RI_ConstraintTrigger_964508" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "periodos_evaluacion"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 261 (OID 964511)
+--
+-- Name: "RI_ConstraintTrigger_964510" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "periodos_evaluacion"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones', 'periodos_evaluacion', 'UNSPECIFIED', 'id_periodo_evaluacion', 'id_periodo_evaluacion');
+
+--
+-- TOC Entry ID 326 (OID 964513)
+--
+-- Name: "RI_ConstraintTrigger_964512" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "evaluaciones"  FROM "semestres" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'evaluaciones', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 211 (OID 964515)
+--
+-- Name: "RI_ConstraintTrigger_964514" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "semestres"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'evaluaciones', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 212 (OID 964517)
+--
+-- Name: "RI_ConstraintTrigger_964516" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "semestres"  FROM "evaluaciones" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'evaluaciones', 'semestres', 'UNSPECIFIED', 'id_semestre', 'id_semestre');
+
+--
+-- TOC Entry ID 327 (OID 964519)
+--
+-- Name: "RI_ConstraintTrigger_964518" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "accesos_fkey" AFTER INSERT OR UPDATE ON "accesos_usuario"  FROM "usuarios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('accesos_fkey', 'accesos_usuario', 'usuarios', 'UNSPECIFIED', 'usuario_id', 'usuario_id');
+
+--
+-- TOC Entry ID 290 (OID 964521)
+--
+-- Name: "RI_ConstraintTrigger_964520" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "accesos_fkey" AFTER DELETE ON "usuarios"  FROM "accesos_usuario" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('accesos_fkey', 'accesos_usuario', 'usuarios', 'UNSPECIFIED', 'usuario_id', 'usuario_id');
+
+--
+-- TOC Entry ID 291 (OID 964523)
+--
+-- Name: "RI_ConstraintTrigger_964522" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "accesos_fkey" AFTER UPDATE ON "usuarios"  FROM "accesos_usuario" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('accesos_fkey', 'accesos_usuario', 'usuarios', 'UNSPECIFIED', 'usuario_id', 'usuario_id');
+
+--
+-- TOC Entry ID 328 (OID 965283)
+--
+-- Name: "RI_ConstraintTrigger_965282" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "aspirantes"  FROM "planteles" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'aspirantes', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 203 (OID 965285)
+--
+-- Name: "RI_ConstraintTrigger_965284" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "planteles"  FROM "aspirantes" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'aspirantes', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 204 (OID 965287)
+--
+-- Name: "RI_ConstraintTrigger_965286" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "planteles"  FROM "aspirantes" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'aspirantes', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 329 (OID 965289)
+--
+-- Name: "RI_ConstraintTrigger_965288" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "aspirantes"  FROM "delegaciones_municipios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'aspirantes', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 193 (OID 965291)
+--
+-- Name: "RI_ConstraintTrigger_965290" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "delegaciones_municipios"  FROM "aspirantes" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'aspirantes', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 194 (OID 965293)
+--
+-- Name: "RI_ConstraintTrigger_965292" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "delegaciones_municipios"  FROM "aspirantes" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'aspirantes', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 330 (OID 965314)
+--
+-- Name: "RI_ConstraintTrigger_965313" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "colonias"  FROM "planteles" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'colonias', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 205 (OID 965316)
+--
+-- Name: "RI_ConstraintTrigger_965315" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "planteles"  FROM "colonias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'colonias', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 206 (OID 965318)
+--
+-- Name: "RI_ConstraintTrigger_965317" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "planteles"  FROM "colonias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'colonias', 'planteles', 'UNSPECIFIED', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 331 (OID 965320)
+--
+-- Name: "RI_ConstraintTrigger_965319" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "colonias"  FROM "delegaciones_municipios" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'colonias', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 195 (OID 965322)
+--
+-- Name: "RI_ConstraintTrigger_965321" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "delegaciones_municipios"  FROM "colonias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'colonias', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 196 (OID 965324)
+--
+-- Name: "RI_ConstraintTrigger_965323" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "delegaciones_municipios"  FROM "colonias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'colonias', 'delegaciones_municipios', 'UNSPECIFIED', 'id_delegacion', 'id_delegacion');
+
+--
+-- TOC Entry ID 332 (OID 1016614)
+--
+-- Name: "RI_ConstraintTrigger_1016613" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "asistencias"  FROM "grupos" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'asistencias', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 304 (OID 1016616)
+--
+-- Name: "RI_ConstraintTrigger_1016615" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "grupos"  FROM "asistencias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'asistencias', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 305 (OID 1016618)
+--
+-- Name: "RI_ConstraintTrigger_1016617" Type: TRIGGER Owner: hugo
+--
+
+CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "grupos"  FROM "asistencias" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'asistencias', 'grupos', 'UNSPECIFIED', 'id_grupo', 'id_grupo', 'id_plantel', 'id_plantel');
+
+--
+-- TOC Entry ID 3 (OID 824391)
+--
+-- Name: estados_id_estado_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"estados_id_estado_seq"', 7, 't');
+
+--
+-- TOC Entry ID 5 (OID 824430)
+--
+-- Name: delegaciones__id_delegacion_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"delegaciones__id_delegacion_seq"', 22, 't');
+
+--
+-- TOC Entry ID 7 (OID 824469)
+--
+-- Name: planteles_id_plantel_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"planteles_id_plantel_seq"', 23, 't');
+
+--
+-- TOC Entry ID 9 (OID 824511)
+--
+-- Name: semestres_id_semestre_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"semestres_id_semestre_seq"', 15, 't');
+
+--
+-- TOC Entry ID 11 (OID 824606)
+--
+-- Name: modalidades_id_modalidad_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"modalidades_id_modalidad_seq"', 13, 't');
+
+--
+-- TOC Entry ID 13 (OID 824645)
+--
+-- Name: situaciones_al_id_situacion_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"situaciones_al_id_situacion_seq"', 4, 't');
+
+--
+-- TOC Entry ID 15 (OID 824725)
+--
+-- Name: objetivos_id_objetivo_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"objetivos_id_objetivo_seq"', 616, 'f');
+
+--
+-- TOC Entry ID 17 (OID 824766)
+--
+-- Name: periodos_eval_id_periodo_ev_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"periodos_eval_id_periodo_ev_seq"', 4, 't');
+
+--
+-- TOC Entry ID 19 (OID 824805)
+--
+-- Name: recomendacion_id_recomendac_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"recomendacion_id_recomendac_seq"', 4, 't');
+
+--
+-- TOC Entry ID 21 (OID 824858)
+--
+-- Name: aulas_id_aula_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"aulas_id_aula_seq"', 47, 't');
+
+--
+-- TOC Entry ID 23 (OID 824910)
+--
+-- Name: grupos_horarios_id_grupo_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"grupos_horarios_id_grupo_seq"', 1, 'f');
+
+--
+-- TOC Entry ID 25 (OID 824966)
+--
+-- Name: estados_civil_id_estado_civ_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"estados_civil_id_estado_civ_seq"', 3, 't');
+
+--
+-- TOC Entry ID 27 (OID 825240)
+--
+-- Name: asignaturas_id_asignatura_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"asignaturas_id_asignatura_seq"', 608, 'f');
+
+--
+-- TOC Entry ID 29 (OID 825311)
+--
+-- Name: usuarios_usuario_id_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"usuarios_usuario_id_seq"', 118, 't');
+
+--
+-- TOC Entry ID 31 (OID 825354)
+--
+-- Name: grupos_id_grupo_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"grupos_id_grupo_seq"', 1805, 't');
+
+--
+-- TOC Entry ID 33 (OID 825416)
+--
+-- Name: profesores_id_profesor_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"profesores_id_profesor_seq"', 311, 't');
+
+--
+-- TOC Entry ID 35 (OID 1016573)
+--
+-- Name: asistencias_id_asistencia_seq Type: SEQUENCE SET Owner: 
+--
+
+SELECT setval ('"asistencias_id_asistencia_seq"', 57, 't');
+
